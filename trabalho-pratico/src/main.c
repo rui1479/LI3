@@ -11,12 +11,27 @@ int main(int argc, char* argv[]){
 
     start = clock();
 
+    char *usersfile = malloc(strlen(argv[1])+strlen("users.csv")+1000);
+        strcpy(usersfile,argv[1]);
+        strcat(usersfile,"/users.csv");
+
+    char *driversfile= malloc(strlen(argv[1])+strlen("drivers.csv")+1000);
+        strcpy(driversfile,argv[1]);
+        strcat(driversfile,"/drivers.csv");
+
+    char *ridesfile = malloc(strlen(argv[1])+strlen("rides.csv")+1000);
+        strcpy(ridesfile,argv[1]);
+        strcat(ridesfile,"/rides.csv");
+
+    FILE* fileUser = fopen(usersfile,"r");
+    FILE* fileDriver = fopen(driversfile,"r");
+    FILE* fileRides = fopen(ridesfile,"r");
+    FILE* f = fopen(argv[2],"r");
+
+
     CatUser catalogoUsers = parseUser();
     CatRides catalogoRides = parseRides();
     CatDriver catalogoDrivers = parseDrivers();
-
-    FILE *f;
-    f = fopen("input.txt", "r");
 
     //printf("nome main: %s \n", get_name_list_driver(catalogoDrivers, "000000000745"));
 
@@ -25,7 +40,6 @@ int main(int argc, char* argv[]){
     int i = 1;
     int j = 0;
     while(fgets(buff, maxLength, f)){
-
         char *string = strdup(buff);
         char *query;
         char *arg1;
@@ -72,8 +86,8 @@ int main(int argc, char* argv[]){
                     else if(atoi(query) == 3){ // então é a query 3
                         //query3();
                     }
-                    else if(atoi(query) == 3){ // então é a query 4
-                        //query4();
+                    else if(atoi(query) == 4){ // então é a query 4
+                            query4(catalogoDrivers,catalogoRides,arg1,i);
                     }
                 }
             }

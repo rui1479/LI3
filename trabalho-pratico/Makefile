@@ -11,7 +11,7 @@ EXECUTABLE_NAME := programa-principal
 all: $(EXECUTABLE_NAME) $(TESTS_EXECUTABLE_NAME)
 
 run: $(EXECUTABLE_NAME) $(DATASET)/drivers.csv $(DATASET)/users.csv $(DATASET)/rides.csv 
-	./programa-principal $(DATASET)/drivers.csv $(DATASET)/users.csv $(DATASET)/rides.csv   
+	./programa-principal Dataset_Fase1 input.txt  
 
 $(EXECUTABLE_NAME): $(BIN_DIR)/main.o $(BIN_DIR)/data.o $(BIN_DIR)/drivers.o $(BIN_DIR)/getters.o $(BIN_DIR)/parse.o $(BIN_DIR)/queries.o $(BIN_DIR)/rides.o $(BIN_DIR)/user.o
 	$(CC) $(CFLAGS) $^ $(LDFLAGS) -o $@

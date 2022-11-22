@@ -42,6 +42,15 @@ int get_idade_list_User(CatUser catalogos, char* username){
   return idade;
 }
 
+// void get_status(CatUser catalogos, char* username){
+//   char* novousername = strsep(&username,"\n");
+//   User user = g_hash_table_lookup(catalogos->user, novousername);
+//   if(strcmp("active",get_account_status_user(user))==0){
+//     printf("1");
+//   }
+//   else printf("0");
+// }
+
 //-------------------------------------------------------------------------DRIVERS----------------------------------------------------------------------------------------------------------------
 
 char* get_name_list_driver(CatDriver catalogos, char* id){
@@ -231,6 +240,46 @@ double get_total_gasto(CatRides catalogosrides, CatUser catalogosusers, CatDrive
       }
     }
   }
+
+  return total;
+}
+
+double get_preco_medio_city(CatRides catalogosrides, CatDriver catalogodrivers, char *city){
+  char* novacity = strsep(&city,"\n");
+
+  double km=0;
+  double total = 0;
+  int contador=0;
+
+  gpointer key, value;
+  GHashTableIter iter;
+  g_hash_table_iter_init(&iter, catalogosrides->Rides); 
+  while(g_hash_table_iter_next(&iter, &key, &value)){
+    Rides ride = value;
+
+    char* id = get_driver_Rides(ride);
+
+    Driver drivers = g_hash_table_lookup(catalogodrivers->Driver, id);
+    char* car_class = g_strdup(get_car_class_driver(drivers));
+
+    if(strcmp(novacity,get_city_Rides(ride)) == 0){
+        km = atoi(get_distance_Rides(ride));
+        if(strcmp("green",car_class)==0){
+          total += 4 + 0.79 * km;
+        }
+
+        if(strcmp("basic",car_class)==0){
+          total += 3.25 + 0.62 * km;
+        }
+          
+        if(strcmp("premium",car_class)==0){
+          total += 5.20 + 0.94 * km;
+      }
+      contador++;
+    }
+  }
+
+  total = total / contador;
 
   return total;
 }
