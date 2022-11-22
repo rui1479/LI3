@@ -10,7 +10,6 @@
 # Ignore default executable
 a.out
 *.o
-*.exe
 *users*.csv
 *drivers*.csv
 *rides*.csv
