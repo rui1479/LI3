@@ -41,7 +41,7 @@ $(BIN_DIR)/user.o: $(BIN_DIR) $(SRC_DIR)/user.c
 	$(CC) $(CFLAGS) -I$(INC_DIR) -c $(SRC_DIR)/user.c -o $@
 
 run: 
-	./programa-principal Dataset_Fase1 input.txt  
+	./programa-principal Dataset_Fase1 Dataset_Fase1/input.txt  
 
 clean:
 	rm -rf $(BIN_DIR) $(EXECUTABLE_NAME)

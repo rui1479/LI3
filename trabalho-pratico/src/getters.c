@@ -256,12 +256,11 @@ double get_preco_medio_city(CatRides catalogosrides, CatDriver catalogodrivers, 
   g_hash_table_iter_init(&iter, catalogosrides->Rides); 
   while(g_hash_table_iter_next(&iter, &key, &value)){
     Rides ride = value;
-
     char* id = get_driver_Rides(ride);
 
     Driver drivers = g_hash_table_lookup(catalogodrivers->Driver, id);
     char* car_class = g_strdup(get_car_class_driver(drivers));
-
+    
     if(strcmp(novacity,get_city_Rides(ride)) == 0){
         km = atoi(get_distance_Rides(ride));
         if(strcmp("green",car_class)==0){
