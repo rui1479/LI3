@@ -18,7 +18,7 @@ int get_numero_viagens(CatRides catalogos, char *id);
 double get_total_euferido(CatRides catalogosrides, CatDriver catalogosdrivers, char *id);
 
 double get_preco_medio_city(CatRides catalogosrides, CatDriver catalogodrivers, char *city);
-double get_preco_medio_data(CatDriver catalogodrivers, CatRides catalogorides, char* data_inicial, char* data_final);
+//double get_preco_medio_data(CatDriver catalogodrivers, CatRides catalogorides, char* data_inicial, char* data_final);
 
 
 #endif

@@ -58,7 +58,7 @@ int main(int argc, char* argv[]){
                     }
                     else{ // queries com 2 argumentos
                         if(atoi(query) == 5){ // então é a query 5
-                            query5(catalogoDrivers,catalogoRides,arg1,arg2,i);
+                            //query5(catalogoDrivers,catalogoRides,arg1,arg2,i);
                         }
                         else if(atoi(query) == 7){// então é a 7
                             //query7();

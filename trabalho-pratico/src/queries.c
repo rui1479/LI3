@@ -57,13 +57,13 @@ void query4 (CatDriver catalogoDrivers, CatRides catalogoRides, char* city, int 
     fclose(query4txt);
 }
 
-void query5 (CatDriver catalogoDrivers, CatRides catalogoRides, char* data_inicial, char* data_final, int linha){
-    char* novadatai = strsep(&data_inicial,"\n");
-    char* novadataf = strsep(&data_final,"\n");
-    char buffer[128];
-    sprintf(buffer, "Resultados/command%d_output.txt", linha);
-    FILE *query5txt = fopen(buffer, "w");
-    double preco_medio_data = get_preco_medio_data(catalogoDrivers, catalogoRides, novadatai, novadataf);
-    fprintf(query5txt, "%.3f\n",preco_medio_data);
-    fclose(query5txt);
-}
+// void query5 (CatDriver catalogoDrivers, CatRides catalogoRides, char* data_inicial, char* data_final, int linha){
+//     char* novadatai = strsep(&data_inicial,"\n");
+//     char* novadataf = strsep(&data_final,"\n");
+//     char buffer[128];
+//     sprintf(buffer, "Resultados/command%d_output.txt", linha);
+//     FILE *query5txt = fopen(buffer, "w");
+//     double preco_medio_data = get_preco_medio_data(catalogoDrivers, catalogoRides, novadatai, novadataf);
+//     fprintf(query5txt, "%.3f\n",preco_medio_data);
+//     fclose(query5txt);
+// }
