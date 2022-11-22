@@ -5,7 +5,7 @@
 */
 
 int main(int argc, char* argv[]){
-
+    
     clock_t start, end;
     double cpu_time_used;
 
@@ -31,7 +31,6 @@ int main(int argc, char* argv[]){
     CatUser catalogoUsers = parseUser(fileUser);
     CatRides catalogoRides = parseRides(fileDriver);
     CatDriver catalogoDrivers = parseDrivers(fileRides);
-
 
     int maxLength = 1024000;
     char buff[maxLength];
