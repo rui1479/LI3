@@ -1,5 +1,4 @@
 #include "../include/parse.h"
-#include <string.h>
 #define MAXL 1024000
 
 /**
@@ -7,43 +6,39 @@
 */
 
 int main(int argc, char* argv[]){
-    printf("1\n");
+
     clock_t start, end;
+
     double cpu_time_used;
 
     start = clock();
+
     char *usersfile = malloc(strlen(argv[1])+strlen("users.csv")+1000);
         strcpy(usersfile,argv[1]);
         strcat(usersfile,"/users.csv");
-    printf("%s\n",usersfile);
 
     char *driversfile= malloc(strlen(argv[1])+strlen("drivers.csv")+1000);
         strcpy(driversfile,argv[1]);
         strcat(driversfile,"/drivers.csv");
-    printf("%s\n",driversfile);
 
     char *ridesfile = malloc(strlen(argv[1])+strlen("rides.csv")+1000);
         strcpy(ridesfile,argv[1]);
         strcat(ridesfile,"/rides.csv");
-    printf("%s\n",driversfile);
+    
 
     FILE* fileUser = fopen(usersfile,"r");
     FILE* fileDriver = fopen(driversfile,"r");
     FILE* fileRides = fopen(ridesfile,"r");
     FILE* f = fopen(argv[2],"r");
-
-    printf("3\n");
+    
     CatUser catalogoUsers = parseUser(fileUser);
-    printf("51\n");
     CatRides catalogoRides = parseRides(fileRides);
-    printf("61\n");
     CatDriver catalogoDrivers = parseDrivers(fileDriver);
-    printf("4\n");
+    
 
     char buff[MAXL];
     int i = 1;
     int j = 0;
-
     while(fgets(buff, MAXL, f)){
         char *string = g_strdup(buff);
         char *query;
@@ -52,8 +47,8 @@ int main(int argc, char* argv[]){
         char *arg3;
         char *arg4;
         if((query = (char*)g_strdup(strsep(&string, " ")))!= NULL){
-            if((arg1 = (char*)strsep(&string, " ")) != NULL){
-                if((arg2 = (char*)strsep(&string, " ")) != NULL){
+            if((arg1 = (char*)g_strdup(strsep(&string, " "))) != NULL){
+                if((arg2 = (char*)g_strdup(strsep(&string, " "))) != NULL){
                     if((arg3 = (char*)strsep(&string, " ")) != NULL){
                         if((arg4 = (char*)strsep(&string, " ")) != NULL){
                         }
@@ -63,7 +58,7 @@ int main(int argc, char* argv[]){
                     }
                     else{ // queries com 2 argumentos
                         if(atoi(query) == 5){ // então é a query 5
-                            //query5();
+                            query5(catalogoDrivers,catalogoRides,arg1,arg2,i);
                         }
                         else if(atoi(query) == 7){// então é a 7
                             //query7();
@@ -78,14 +73,10 @@ int main(int argc, char* argv[]){
                 }
                 else{ // queries com 1 argumentos
                     if(atoi(query) == 1){ // então é a query 1
-                        printf("%s",arg1);
-                        printf("%i",j);
-                        printf("\n");
                         if(isdigit(arg1[j])){
                             query1_drivers(catalogoDrivers,catalogoRides, arg1,i);
                         }
                         else{
-                            printf("6\n");
                             query1_users(catalogoUsers,catalogoRides, catalogoDrivers, arg1,i);
                         }
                     }
@@ -96,7 +87,6 @@ int main(int argc, char* argv[]){
                         //query3();
                     }
                     else if(atoi(query) == 4){ // então é a query 4
-                             printf("7\n");
                              query4(catalogoDrivers,catalogoRides,arg1,i);
                     }
                 }

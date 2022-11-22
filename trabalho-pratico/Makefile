@@ -1,5 +1,5 @@
 CC := gcc
-CFLAGS := -O0 -O -g `pkg-config --cflags glib-2.0`
+CFLAGS := -O0 -g `pkg-config --cflags glib-2.0`
 LDFLAGS := `pkg-config --libs glib-2.0`
 
 DATASET := Dataset_Fase1

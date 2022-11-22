@@ -284,42 +284,46 @@ double get_preco_medio_city(CatRides catalogosrides, CatDriver catalogodrivers, 
   return total;
 }
 
-// double get_preco_medio_data(CatDriver catalogodrivers, CatRides catalogorides, char* data_inicial, char* data_final){
+// int data_aux(Data a, Data b, Data c){
+//    int ano_a = get_ano(a);
+//    int ano_c = get_ano(c);
+//    int mes_a = get_mes(a);
+//    int mes_c = get_mes(c);
+//    int dia_a = get_dia(a);
+//    int dia_c = get_dia(c);
+//    int ano_ref = get_ano(b);
+//    int mes_ref = get_mes(b);
+//    int dia_ref = get_dia(b);
+//   if(ano_ref > ano_a || ano_ref == ano_a && mes_ref > mes_a ||ano_ref == ano_a && mes_ref == mes_a && dia_ref > dia_a){
+//       if(ano_ref < ano_c || ano_ref == ano_c && mes_ref < mes_c || ano_ref == ano_c && mes_ref == mes_c && dia_ref < dia_c ){
+//         return 1;
+//       }
+//   } 
 
+// }
+
+// double get_preco_medio_data(CatDriver catalogodrivers, CatRides catalogorides, char* data_inicial, char* data_final){
 //   Data inicial = build_data(data_inicial);
 //   Data final = build_data(data_final);
-//   int ano_inicial = get_ano(inicial);
-//   int ano_final = get_ano(final);
-//   int mes_inicial = get_mes(inicial);
-//   int mes_final = get_mes(final);
-//   int dia_inicial = get_dia(inicial);
-//   int dia_final = get_dia(final);
 
-//   int ano_ref;
-//   int mes_ref;
-//   int dia_ref;
-
-//   double km=0;
+//   int contador = 0;
+//   int km = 0;
 //   double total = 0;
-//   int contador=0;
 
-//   gpointer key, value;
-//   GHashTableIter iter;
-//   g_hash_table_iter_init(&iter, catalogorides->Rides); 
-//   while(g_hash_table_iter_next(&iter, &key, &value)){
-//     Rides ride = value;
-//     char* id = get_driver_Rides(ride);
+//    gpointer key, value;
+//    GHashTableIter iter;
+//    g_hash_table_iter_init(&iter, catalogorides->Rides); 
+//    while(g_hash_table_iter_next(&iter, &key, &value)){
+//      Rides ride = value;
+//      char* id = get_driver_Rides(ride);
 
-//     Driver drivers = g_hash_table_lookup(catalogodrivers->Driver, id);
-//     char* car_class = g_strdup(get_car_class_driver(drivers));
-//   // inicial: 22/11/2021 ref: 20/10/2022
-//     char* data_ref = get_date_Rides(ride);
-//     Data data_a_comparar = build_data(data_ref);
-//     int dia_ref = get_dia(data_a_comparar);
-//     int mes_ref = get_mes(data_a_comparar);
-//     int ano_ref = get_ano(data_a_comparar);
+//      Driver drivers = g_hash_table_lookup(catalogodrivers->Driver, id);
+//      char* car_class = g_strdup(get_car_class_driver(drivers));
+//      char* data_ref = get_date_Rides(ride);
 
-//     if(){
+//      Data data_a_comparar = build_data(data_ref);
+
+//      if(data_aux(inicial,data_a_comparar,final)){
 //         km = atoi(get_distance_Rides(ride));
 //         if(strcmp("green",car_class)==0){
 //           total += 4 + 0.79 * km;
@@ -335,8 +339,5 @@ double get_preco_medio_city(CatRides catalogosrides, CatDriver catalogodrivers, 
 //       contador++;
 //     }
 //   }
-
-//   total = total / contador;
-
-//   return total;
+// return 0;
 // }
