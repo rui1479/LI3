@@ -11,9 +11,9 @@
 #include "../include/getters.h"
 #include "../include/data.h"
 
-CatUser parseUser();
-CatRides parseRides();
-CatDriver parseDrivers();
+CatUser parseUser(FILE* fileUser);
+CatRides parseRides(FILE* fileRides);
+CatDriver parseDrivers(FILE* fileDriver);
 
 
 #endif                                                                              

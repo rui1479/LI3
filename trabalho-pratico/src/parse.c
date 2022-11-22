@@ -1,9 +1,8 @@
 #include "../include/parse.h"
 
-CatUser parseUser(){
+CatUser parseUser(FILE* fileUser){
     CatUser catalogoUser = malloc(sizeof(CatUser));
     GHashTable* user = g_hash_table_new(g_str_hash, g_str_equal);
-    FILE *fileUser = fopen("Dataset_Fase1/users.csv", "r");
 
     int max_length = 1024000;
     char buff[max_length];
@@ -28,12 +27,11 @@ CatUser parseUser(){
 }
 
 
-CatRides parseRides(){
+CatRides parseRides(FILE* fileRides){
     CatRides catalogoRides = malloc(sizeof(CatRides));
     GHashTable* rides = g_hash_table_new(g_str_hash, g_str_equal);
     GHashTable* ridesuser = g_hash_table_new(g_str_hash, g_str_equal);
     GHashTable* ridesdriver = g_hash_table_new(g_str_hash, g_str_equal);
-    FILE *fileRides = fopen("Dataset_Fase1/rides.csv", "r"); 
     
     int max_length = 1024000;
     char buff[max_length];
@@ -60,10 +58,9 @@ CatRides parseRides(){
 
 
 
-CatDriver parseDrivers(){
+CatDriver parseDrivers(FILE* fileDriver){
     CatDriver catalogoDriver = malloc(sizeof(CatDriver));
     GHashTable* driver = g_hash_table_new(g_str_hash, g_str_equal);
-    FILE *fileDriver = fopen("Dataset_Fase1/drivers.csv", "r");
 
     int max_length = 1024000;
     char buff[max_length];

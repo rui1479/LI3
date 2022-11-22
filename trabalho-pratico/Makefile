@@ -10,9 +10,6 @@ EXECUTABLE_NAME := programa-principal
 
 all: $(EXECUTABLE_NAME) $(TESTS_EXECUTABLE_NAME)
 
-run: $(EXECUTABLE_NAME) $(DATASET)/drivers.csv $(DATASET)/users.csv $(DATASET)/rides.csv 
-	./programa-principal Dataset_Fase1 input.txt  
-
 $(EXECUTABLE_NAME): $(BIN_DIR)/main.o $(BIN_DIR)/data.o $(BIN_DIR)/drivers.o $(BIN_DIR)/getters.o $(BIN_DIR)/parse.o $(BIN_DIR)/queries.o $(BIN_DIR)/rides.o $(BIN_DIR)/user.o
 	$(CC) $(CFLAGS) $^ $(LDFLAGS) -o $@
 
@@ -42,6 +39,9 @@ $(BIN_DIR)/rides.o: $(BIN_DIR) $(SRC_DIR)/rides.c
 
 $(BIN_DIR)/user.o: $(BIN_DIR) $(SRC_DIR)/user.c
 	$(CC) $(CFLAGS) -I$(INC_DIR) -c $(SRC_DIR)/user.c -o $@
+
+run: 
+	./programa-principal Dataset_Fase1 input.txt  
 
 clean:
 	rm -rf $(BIN_DIR) $(EXECUTABLE_NAME)

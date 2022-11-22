@@ -28,12 +28,10 @@ int main(int argc, char* argv[]){
     FILE* fileRides = fopen(ridesfile,"r");
     FILE* f = fopen(argv[2],"r");
 
+    CatUser catalogoUsers = parseUser(fileUser);
+    CatRides catalogoRides = parseRides(fileDriver);
+    CatDriver catalogoDrivers = parseDrivers(fileRides);
 
-    CatUser catalogoUsers = parseUser();
-    CatRides catalogoRides = parseRides();
-    CatDriver catalogoDrivers = parseDrivers();
-
-    //printf("nome main: %s \n", get_name_list_driver(catalogoDrivers, "000000000745"));
 
     int maxLength = 1024000;
     char buff[maxLength];
