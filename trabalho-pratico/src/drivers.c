@@ -105,15 +105,3 @@ Driver build_Driver(char *line){
     return a;
 }
 
-void print_driver(Driver a) {
-    printf("%s | %s | %s | %s | %s | %s | %s | %s | %s \n",
-        a -> id,
-        a -> name,
-        a -> birth,
-        a -> gender,
-        a -> car_class,
-        a -> license_plate,
-        a -> city,
-        a -> account_creation,
-        a -> account_status);
-}
