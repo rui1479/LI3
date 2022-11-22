@@ -1,5 +1,5 @@
 # Ignore all
-*
+
 
 # Unignore all with extensions
 !*.*
@@ -9,7 +9,6 @@
 
 # Ignore default executable
 a.out
-*.o
 *users*.csv
 *drivers*.csv
 *rides*.csv
