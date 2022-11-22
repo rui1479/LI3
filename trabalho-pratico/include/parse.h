@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <ctype.h>
+#include <string.h>
 
 #include "../include/drivers.h"
 #include "../include/rides.h"

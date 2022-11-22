@@ -1,4 +1,5 @@
 #include "../include/parse.h"
+#include <string.h>
 #define MAXL 1024000
 
 /**
@@ -44,17 +45,17 @@ int main(int argc, char* argv[]){
     int j = 0;
 
     while(fgets(buff, MAXL, f)){
-        char *string = strdup(buff);
+        char *string = g_strdup(buff);
         char *query;
         char *arg1;
         char *arg2;
         char *arg3;
         char *arg4;
-        if((query = strsep(&string, " ")) != NULL){
-            if((arg1 = strsep(&string, " ")) != NULL){
-                if((arg2 = strsep(&string, " ")) != NULL){
-                    if((arg3 = strsep(&string, " ")) != NULL){
-                        if((arg4 = strsep(&string, " ")) != NULL){
+        if((query = (char*)g_strdup(strsep(&string, " ")))!= NULL){
+            if((arg1 = (char*)strsep(&string, " ")) != NULL){
+                if((arg2 = (char*)strsep(&string, " ")) != NULL){
+                    if((arg3 = (char*)strsep(&string, " ")) != NULL){
+                        if((arg4 = (char*)strsep(&string, " ")) != NULL){
                         }
                         else{ // queries com 3 argumentos apenas temos a 6
                             //query6();
@@ -77,8 +78,10 @@ int main(int argc, char* argv[]){
                 }
                 else{ // queries com 1 argumentos
                     if(atoi(query) == 1){ // então é a query 1
+                        printf("%s",arg1);
+                        printf("%i",j);
+                        printf("\n");
                         if(isdigit(arg1[j])){
-                            printf("5\n");
                             query1_drivers(catalogoDrivers,catalogoRides, arg1,i);
                         }
                         else{
@@ -93,8 +96,8 @@ int main(int argc, char* argv[]){
                         //query3();
                     }
                     else if(atoi(query) == 4){ // então é a query 4
-                            printf("7\n");
-                            query4(catalogoDrivers,catalogoRides,arg1,i);
+                             printf("7\n");
+                             query4(catalogoDrivers,catalogoRides,arg1,i);
                     }
                 }
             }

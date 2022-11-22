@@ -51,9 +51,17 @@ void query1_drivers(CatDriver catalogoDrivers, CatRides catalogoRides, char *id,
 void query4 (CatDriver catalogoDrivers, CatRides catalogoRides, char* city, int linha){
     char buffer[128];
     sprintf(buffer, "Resultados/command%d_output.txt", linha);
-    FILE *query4txt_driver = fopen(buffer, "w");
+    FILE *query4txt = fopen(buffer, "w");
     double preco_medio = get_preco_medio_city(catalogoRides,catalogoDrivers, city);
-    fprintf(query4txt_driver, "%.3f\n", preco_medio);
-    fclose(query4txt_driver);
+    fprintf(query4txt, "%.3f\n", preco_medio);
+    fclose(query4txt);
 }
 
+// void query5 (CatDriver catalogoDrivers, CatRides catalogoRides, char* data_inicial, char* data_final, int linha){
+//     char buffer[128];
+//     sprintf(buffer, "Resultados/command%d_output.txt", linha);
+//     FILE *query5txt = fopen(buffer, "w");
+    
+//     fprintf(query5txt, "%.3f\n",);
+//     fclose(query5txt);
+// }
