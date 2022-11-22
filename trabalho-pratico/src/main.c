@@ -1,16 +1,16 @@
 #include "../include/parse.h"
+#define MAXL 1024000
 
 /**
  * Função main do programa.
 */
 
 int main(int argc, char* argv[]){
-    
+
     clock_t start, end;
     double cpu_time_used;
 
     start = clock();
-
     char *usersfile = malloc(strlen(argv[1])+strlen("users.csv")+1000);
         strcpy(usersfile,argv[1]);
         strcat(usersfile,"/users.csv");
@@ -29,14 +29,14 @@ int main(int argc, char* argv[]){
     FILE* f = fopen(argv[2],"r");
 
     CatUser catalogoUsers = parseUser(fileUser);
-    CatRides catalogoRides = parseRides(fileDriver);
-    CatDriver catalogoDrivers = parseDrivers(fileRides);
+    CatRides catalogoRides = parseRides(fileRides);
+    CatDriver catalogoDrivers = parseDrivers(fileDriver);
 
-    int maxLength = 1024000;
-    char buff[maxLength];
+    char buff[MAXL];
     int i = 1;
     int j = 0;
-    while(fgets(buff, maxLength, f)){
+
+    while(fgets(buff, MAXL, f)){
         char *string = strdup(buff);
         char *query;
         char *arg1;
@@ -71,7 +71,7 @@ int main(int argc, char* argv[]){
                 else{ // queries com 1 argumentos
                     if(atoi(query) == 1){ // então é a query 1
                         if(isdigit(arg1[j])){
-                            query1_drivers(catalogoDrivers,catalogoRides, arg1,i);  
+                            query1_drivers(catalogoDrivers,catalogoRides, arg1,i);
                         }
                         else{
                             query1_users(catalogoUsers,catalogoRides, catalogoDrivers, arg1,i);
