@@ -4,6 +4,7 @@
 # Unignore all with extensions
 !*.*
 !Makefile
+!Resultados
 
 # Unignore all dirs
 !*/
@@ -14,4 +15,3 @@ a.out
 *users*.csv
 *drivers*.csv
 *rides*.csv
-Resultados/
