@@ -12,7 +12,8 @@ int main(int argc, char* argv[]){
     double cpu_time_used;
 
     start = clock();
-
+    
+    // cria string com o path completo 
     char *usersfile = malloc(strlen(argv[1])+strlen("users.csv")+1000);
         strcpy(usersfile,argv[1]);
         strcat(usersfile,"/users.csv");
@@ -34,7 +35,6 @@ int main(int argc, char* argv[]){
     CatUser catalogoUsers = parseUser(fileUser);
     CatRides catalogoRides = parseRides(fileRides);
     CatDriver catalogoDrivers = parseDrivers(fileDriver);
-    
 
     char buff[MAXL];
     int i = 1;

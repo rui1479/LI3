@@ -21,61 +21,61 @@ struct rides {
 
 char* get_id_Rides(Rides r) {
   if(r)
-    return r->id;
+    return g_strdup(r->id);
   return NULL;
 }
 
 char* get_date_Rides(Rides r) {
   if(r)
-    return r->date;
+    return g_strdup(r->date);
   return NULL;
 }
 
 char* get_driver_Rides(Rides r) {
   if(r)
-    return r->driver;
+    return g_strdup(r->driver);
   return NULL;
 }
 
 char* get_user_Rides(Rides r) {
   if(r)
-    return r->user;
+    return g_strdup(r->user);
   return NULL;
 }
 
 char* get_city_Rides(Rides r) {
   if(r)
-    return r->city;
+    return g_strdup(r->city);
   return NULL;
 }
 
 char* get_distance_Rides(Rides r) {
   if(r)
-    return r->distance;
+    return g_strdup(r->distance);
   return NULL;
 }
 
 char* get_score_user_Rides(Rides r) {
   if(r)
-    return r->score_user;
+    return g_strdup(r->score_user);
   return NULL;
 }
 
 char* get_score_driver_Rides(Rides r) {
   if(r)
-    return r->score_driver;
+    return g_strdup(r->score_driver);
   return NULL;
 }
 
 char* get_tip_Rides(Rides r) {
   if(r)
-    return r->tip;
+    return g_strdup(r->tip);
   return NULL;
 }
 
 char* get_comment_Rides(Rides r) {
   if(r)
-    return r->comment;
+    return g_strdup(r->comment);
   return NULL;
 }
 

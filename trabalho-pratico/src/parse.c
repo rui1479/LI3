@@ -14,7 +14,7 @@ CatUser parseUser(FILE* fileUser){
 
     while(fgets(buff, max_length, fileUser)){
         User a = build_user(buff);
-        if(a){
+        if(testuser(a)){
             g_hash_table_insert(user, get_username_user(a), a); // key é o username
         }
     }
@@ -43,7 +43,7 @@ CatRides parseRides(FILE* fileRides){
 
     while(fgets(buff, max_length, fileRides)){
         Rides r = build_Rides(buff);
-        if(r){
+        if(testrides(r)){
         g_hash_table_insert(rides, get_id_Rides(r), r); // key é o id do rides
         g_hash_table_insert(ridesuser, get_user_Rides(r), r); // key é o user do rides
         g_hash_table_insert(ridesdriver, get_driver_Rides(r), r);  // key é o driver do rides
@@ -72,7 +72,7 @@ CatDriver parseDrivers(FILE* fileDriver){
 
     while(fgets(buff, max_length, fileDriver)){
         Driver d = build_Driver(buff);
-        if(d){
+        if(testdriver(d)){
             g_hash_table_insert(driver, get_id_driver(d), d);
         }
     }

@@ -18,63 +18,63 @@ struct driver{
 
 char* get_id_driver (Driver a){
     if (a){
-        return a->id;
+        return g_strdup(a->id);
     }
     return NULL;
 }
 
 char* get_name_driver (Driver a){
     if (a){
-        return a->name;
+        return g_strdup(a->name);
     }
     return NULL;
 }
 
 char* get_birth_driver (Driver a){
     if (a){
-        return a->birth;
+        return g_strdup(a->birth);
     }
     return NULL;
 }
 
 char* get_gender_driver (Driver a){
     if (a){
-        return a->gender;
+        return g_strdup(a->gender);
     }
     return NULL;
 }
 
 char* get_car_class_driver (Driver a){
     if (a){
-        return a->car_class;
+        return g_strdup(a->car_class);
     }
     return NULL;
 }
 
 char* get_license_plate_driver (Driver a){
     if (a){
-        return a->license_plate;
+        return g_strdup(a->license_plate);
     }
     return NULL;
 }
 
 char* get_city_driver (Driver a){
     if (a){
-        return a->city;
+        return g_strdup(a->city);
     }
     return NULL;
 }
 
 char* get_account_creation_driver (Driver a){
     if (a){
-        return a->account_creation;
+        return g_strdup(a->account_creation);
     }
     return NULL;
 }
 
 char* get_account_status_driver (Driver a){
     if (a){
-        return a->account_status;
+        return g_strdup(a->account_status);
     }
     return NULL;
 }
@@ -90,30 +90,31 @@ GHashTable* get_catalogo_drivers(CatDriver c){
 
 Driver build_Driver(char *line){
 
-    Driver a = malloc(sizeof(struct driver));
+        Driver a = malloc(sizeof(struct driver));
 
-    a->id = strdup((strsep(&line, ";\n")));
-    a->name = strdup(strsep(&line, ";\n"));
-    a->birth = strdup(strsep(&line, ";\n"));
-    a->gender = strdup(strsep(&line, ";\n"));
-    a->car_class = strdup(strsep(&line, ";\n"));
-    a->license_plate = strdup(strsep(&line, ";\n"));
-    a->city = strdup(strsep(&line, ";\n"));
-    a->account_creation = strdup(strsep(&line, ";\n"));
-    a->account_status = strdup(strsep(&line, ";\n"));
-    
+        a->id = strdup((strsep(&line, ";\n")));
+        a->name = strdup(strsep(&line, ";\n"));
+        a->birth = strdup(strsep(&line, ";\n"));
+        a->gender = strdup(strsep(&line, ";\n"));
+        a->car_class = strdup(strsep(&line, ";\n"));
+        a->license_plate = strdup(strsep(&line, ";\n"));
+        a->city = strdup(strsep(&line, ";\n"));
+        a->account_creation = strdup(strsep(&line, ";\n"));
+        a->account_status = strdup(strsep(&line, ";\n"));
+        
     return a;
+
 }
 
-void print_driver(Driver a) {
-    printf("%s | %s | %s | %s | %s | %s | %s | %s | %s \n",
-        a -> id,
-        a -> name,
-        a -> birth,
-        a -> gender,
-        a -> car_class,
-        a -> license_plate,
-        a -> city,
-        a -> account_creation,
-        a -> account_status);
-}
+// void print_driver(Driver a) {
+//     printf("%s | %s | %s | %s | %s | %s | %s | %s | %s \n",
+//         a -> id,
+//         a -> name,
+//         a -> birth,
+//         a -> gender,
+//         a -> car_class,
+//         a -> license_plate,
+//         a -> city,
+//         a -> account_creation,
+//         a -> account_status);
+// }
