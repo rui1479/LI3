@@ -108,8 +108,6 @@ double get_avaliacao_media(Catalogos catalogos, char* id){
       contador++;
     }
   }
-  printf("contador: %i\n",contador);
-  printf("score: %f\n",score);
   
   total = (double)score/contador;
 
@@ -173,7 +171,7 @@ double get_total_euferido(Catalogos catalogos, char *id){
 double get_avaliacao_media_user(Catalogos catalogos, char* username){
   char* novousername = strsep(&username,"\n");
   double total;
-  float score;
+  double score;
   int contador=0;
   gpointer key, value;
   GHashTableIter iter;
