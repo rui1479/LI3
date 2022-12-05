@@ -152,6 +152,5 @@ int testrides (Rides a){
     return (campos_positivos(get_id_Rides(a)) && testa_data(get_date_Rides(a)) &&
             campos_positivos(get_driver_Rides(a)) && campos_positivos(get_user_Rides(a)) &&
             campos_positivos(get_city_Rides(a)) && testa_distance(get_distance_Rides(a)) &&
-            testa_score(get_score_user_Rides(a)) && testa_score(get_score_driver_Rides(a)) && 
-            testa_tip(get_tip_Rides(a)));
+            testa_score(get_score_user_Rides(a)) && testa_score(get_score_driver_Rides(a)));
 }

@@ -96,7 +96,7 @@ int get_idade_list_driver(Catalogos catalogos, char* id){
 double get_avaliacao_media(Catalogos catalogos, char* id){
   char* novoid = strsep(&id,"\n");
   double total;
-  float score;
+  double score;
   int contador=0;
   gpointer key, value;
   GHashTableIter iter;
@@ -108,7 +108,9 @@ double get_avaliacao_media(Catalogos catalogos, char* id){
       contador++;
     }
   }
-
+  printf("contador: %i\n",contador);
+  printf("score: %f\n",score);
+  
   total = (double)score/contador;
 
   return total;
@@ -183,7 +185,6 @@ double get_avaliacao_media_user(Catalogos catalogos, char* username){
       contador++;
     }
   }
-
   total = (double)score/contador;
 
   return total;

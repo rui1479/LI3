@@ -94,7 +94,9 @@ int main(int argc, char* argv[]){
     }
 
     free(catalogos);
-
+    free(usersfile);
+    free(driversfile);
+    free(ridesfile);
 
     end = clock();
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;

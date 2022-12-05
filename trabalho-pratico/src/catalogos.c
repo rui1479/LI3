@@ -4,7 +4,7 @@
 // -----------------------------------------------------------------------Parse User -----------------------------------------------------------------------------------------
 
 CatUser parseUser(FILE* fileUser){
-    CatUser catalogoUser = malloc(sizeof(CatUser));
+    CatUser catalogoUser = malloc(sizeof(CatUser)*10);
     GHashTable* user = g_hash_table_new(g_str_hash, g_str_equal);
 
     int max_length = 1024000;
@@ -23,6 +23,7 @@ CatUser parseUser(FILE* fileUser){
     }
 
     catalogoUser->user = user;
+    //printf("Users: %i\n",g_hash_table_size(catalogoUser->user));
 
     fclose(fileUser);
 
@@ -32,7 +33,7 @@ CatUser parseUser(FILE* fileUser){
 // -------------------------------------------------------------------------Parse Rides -----------------------------------------------------------------------------------------
 
 CatRides parseRides(FILE* fileRides){
-    CatRides catalogoRides = malloc(sizeof(CatRides));
+    CatRides catalogoRides = malloc(sizeof(CatRides)*100);
     GHashTable* rides = g_hash_table_new(g_str_hash, g_str_equal);
     GHashTable* ridesuser = g_hash_table_new(g_str_hash, g_str_equal);
     GHashTable* ridesdriver = g_hash_table_new(g_str_hash, g_str_equal);
@@ -56,17 +57,18 @@ CatRides parseRides(FILE* fileRides){
 
     catalogoRides->Rides = rides;
     catalogoRides->RidesDriver = ridesdriver;
-    catalogoRides->RidesUser;
+    catalogoRides->RidesUser = ridesuser;
+
+    //printf("Rides: %i\n",g_hash_table_size(catalogoRides->Rides));
 
     fclose(fileRides);
-
     return catalogoRides;
 }
 
 // --------------------------------------------------------------------------Parse Drivers -----------------------------------------------------------------------------------------
 
 CatDriver parseDrivers(FILE* fileDriver){
-    CatDriver catalogoDriver = malloc(sizeof(CatDriver));
+    CatDriver catalogoDriver = malloc(sizeof(CatDriver) * 10);
     GHashTable* driver = g_hash_table_new(g_str_hash, g_str_equal);
 
     int max_length = 1024000;
@@ -87,13 +89,13 @@ CatDriver parseDrivers(FILE* fileDriver){
     catalogoDriver->Driver = driver;
 
     fclose(fileDriver);
-
+    //printf("Drivers: %i\n",g_hash_table_size(catalogoDriver->Driver));
     return catalogoDriver;
 }
 // ------------------------------------------------------------------------Carregar Catalogos -----------------------------------------------------------------------------------------
 
 Catalogos carregaCatalogos(FILE* user,FILE* driver, FILE* rides){
-    Catalogos cat = malloc(sizeof(Catalogos) * 10);
+    Catalogos cat = malloc(sizeof(Catalogos) * 1000);
     printf("\n A carregar Users ...\n");
     CatUser catalogoUsers = parseUser(user);
     printf("\n A carregar Drivers ...\n");
