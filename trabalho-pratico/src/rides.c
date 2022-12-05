@@ -79,24 +79,6 @@ char* get_comment_Rides(Rides r) {
   return NULL;
 }
 
-void set_catRides(CatRides r, GHashTable* u, GHashTable* a, GHashTable* x){
-  r->RidesUser=u;
-  r->RidesDriver=a;
-  r->Rides = x;
-}
-
-GHashTable* get_catalogo_ridesuser(CatRides c){
-  return c->RidesUser;
-}
-
-GHashTable* get_catalogo_ridesdriver(CatRides c){
-  return c->RidesDriver;
-}
-
-GHashTable* get_catalogo_rides(CatRides c){
-  return c->Rides;
-}
-
 
 Rides build_Rides(char *line) {
 

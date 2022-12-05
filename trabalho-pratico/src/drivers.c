@@ -79,15 +79,6 @@ char* get_account_status_driver (Driver a){
     return NULL;
 }
 
-void set_catDriver(CatDriver c, GHashTable* a){
-  c->Driver = a;
-}
-
-GHashTable* get_catalogo_drivers(CatDriver c){
-    return c->Driver;
-}
-
-
 Driver build_Driver(char *line){
 
         Driver a = malloc(sizeof(struct driver));

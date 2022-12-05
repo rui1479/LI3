@@ -1,4 +1,4 @@
-#include "../include/parse.h"
+#include "../include/catalogos.h"
 #define MAXL 1024000
 
 /**
@@ -32,9 +32,7 @@ int main(int argc, char* argv[]){
     FILE* fileRides = fopen(ridesfile,"r");
     FILE* f = fopen(argv[2],"r");
     
-    CatUser catalogoUsers = parseUser(fileUser);
-    CatRides catalogoRides = parseRides(fileRides);
-    CatDriver catalogoDrivers = parseDrivers(fileDriver);
+    Catalogos catalogos = carregaCatalogos(fileUser,fileDriver,fileRides);
 
     char buff[MAXL];
     int i = 1;
@@ -74,10 +72,10 @@ int main(int argc, char* argv[]){
                 else{ // queries com 1 argumentos
                     if(atoi(query) == 1){ // então é a query 1
                         if(isdigit(arg1[j])){
-                            query1_drivers(catalogoDrivers,catalogoRides, arg1,i);
+                            query1_drivers(catalogos, arg1,i);
                         }
                         else{
-                            query1_users(catalogoUsers,catalogoRides, catalogoDrivers, arg1,i);
+                            query1_users(catalogos, arg1,i);
                         }
                     }
                     else if(atoi(query) == 2){ // então é a query 2
@@ -87,7 +85,7 @@ int main(int argc, char* argv[]){
                         //query3();
                     }
                     else if(atoi(query) == 4){ // então é a query 4
-                             query4(catalogoDrivers,catalogoRides,arg1,i);
+                             query4(catalogos,arg1,i);
                     }
                 }
             }
@@ -95,9 +93,7 @@ int main(int argc, char* argv[]){
         i++;
     }
 
-    free(catalogoUsers);
-    free(catalogoRides);
-    free(catalogoDrivers);
+    free(catalogos);
 
 
     end = clock();

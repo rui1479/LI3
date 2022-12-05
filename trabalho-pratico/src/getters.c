@@ -4,21 +4,21 @@
 
 //-------------------------------------------------------------------------USERS----------------------------------------------------------------------------------------------------------------
 
-char* get_name_list_user(CatUser catalogos, char* username){
+char* get_name_list_user(Catalogos catalogos, char* username){
   char* novousername = strsep(&username,"\n");
   User user = g_hash_table_lookup(catalogos->user, novousername);
   char* name = g_strdup(get_name_user(user));
   return name;
 } 
 
-char* get_gender_list_user(CatUser catalogos, char* username){
+char* get_gender_list_user(Catalogos catalogos, char* username){
   char* novousername = strsep(&username,"\n");
   User user = g_hash_table_lookup(catalogos->user, novousername);
   char* gender = g_strdup(get_gender_user(user));
   return gender;
 }
 
-int get_idade_list_User(CatUser catalogos, char* username){
+int get_idade_list_User(Catalogos catalogos, char* username){
   char* novousername = strsep(&username,"\n");
   int idade = 0;
   User user = g_hash_table_lookup(catalogos->user, novousername);
@@ -42,7 +42,7 @@ int get_idade_list_User(CatUser catalogos, char* username){
   return idade;
 }
 
-// void get_status(CatUser catalogos, char* username){
+// void get_status(Catalogos catalogos, char* username){
 //   char* novousername = strsep(&username,"\n");
 //   User user = g_hash_table_lookup(catalogos->user, novousername);
 //   if(strcmp("active",get_account_status_user(user))==0){
@@ -53,21 +53,21 @@ int get_idade_list_User(CatUser catalogos, char* username){
 
 //-------------------------------------------------------------------------DRIVERS----------------------------------------------------------------------------------------------------------------
 
-char* get_name_list_driver(CatDriver catalogos, char* id){
+char* get_name_list_driver(Catalogos catalogos, char* id){
   char* novoid = strsep(&id,"\n");
   Driver drivers = g_hash_table_lookup(catalogos->Driver, novoid);
   char* name = g_strdup(get_name_driver(drivers));
   return name;
 }        
 
-char* get_gender_list_driver(CatDriver catalogos, char* id){
+char* get_gender_list_driver(Catalogos catalogos, char* id){
   char* novoid = strsep(&id,"\n");
   Driver driver = g_hash_table_lookup(catalogos->Driver, novoid);
   char* gender = g_strdup(get_gender_driver(driver));
   return gender;
 }
 
-int get_idade_list_driver(CatDriver catalogos, char* id){
+int get_idade_list_driver(Catalogos catalogos, char* id){
   char* novoid = strsep(&id,"\n");
   int idade = 0;
   Driver driver = g_hash_table_lookup(catalogos->Driver, novoid);
@@ -93,7 +93,7 @@ int get_idade_list_driver(CatDriver catalogos, char* id){
 
 //-------------------------------------------------------------------------RIDES-DRIVER----------------------------------------------------------------------------------------------------------------
 
-double get_avaliacao_media(CatRides catalogos, char* id){
+double get_avaliacao_media(Catalogos catalogos, char* id){
   char* novoid = strsep(&id,"\n");
   double total;
   float score;
@@ -114,7 +114,7 @@ double get_avaliacao_media(CatRides catalogos, char* id){
   return total;
 }
 
-int get_numero_viagens(CatRides catalogos, char *id){
+int get_numero_viagens(Catalogos catalogos, char *id){
   char* novoid = strsep(&id,"\n");
   int contador=0;
   gpointer key, value;
@@ -129,9 +129,9 @@ int get_numero_viagens(CatRides catalogos, char *id){
   return contador;
 }
 
-double get_total_euferido(CatRides catalogosrides, CatDriver catalogosdrivers, char *id){
+double get_total_euferido(Catalogos catalogos, char *id){
   char* novoid = strsep(&id,"\n");
-  Driver drivers = g_hash_table_lookup(catalogosdrivers->Driver, novoid);
+  Driver drivers = g_hash_table_lookup(catalogos->Driver, novoid);
   char* car_class = g_strdup(get_car_class_driver(drivers));
 
   double km=0;
@@ -140,7 +140,7 @@ double get_total_euferido(CatRides catalogosrides, CatDriver catalogosdrivers, c
 
   gpointer key, value;
   GHashTableIter iter;
-  g_hash_table_iter_init(&iter, catalogosrides->Rides); 
+  g_hash_table_iter_init(&iter, catalogos->Rides); 
   while(g_hash_table_iter_next(&iter, &key, &value)){
     Rides ride = value;
     
@@ -168,7 +168,7 @@ double get_total_euferido(CatRides catalogosrides, CatDriver catalogosdrivers, c
 
 //-------------------------------------------------------------------------RIDES-USER----------------------------------------------------------------------------------------------------------------
 
-double get_avaliacao_media_user(CatRides catalogos, char* username){
+double get_avaliacao_media_user(Catalogos catalogos, char* username){
   char* novousername = strsep(&username,"\n");
   double total;
   float score;
@@ -189,7 +189,7 @@ double get_avaliacao_media_user(CatRides catalogos, char* username){
   return total;
 }
 
-int get_numero_viagens_user(CatRides catalogos, char *username){
+int get_numero_viagens_user(Catalogos catalogos, char *username){
   char* novousername = strsep(&username,"\n");
   int contador=0;
   gpointer key, value;
@@ -204,7 +204,7 @@ int get_numero_viagens_user(CatRides catalogos, char *username){
   return contador;
 }
 
-double get_total_gasto(CatRides catalogosrides, CatUser catalogosusers, CatDriver catalogodrivers, char *username){
+double get_total_gasto(Catalogos catalogos, char *username){
   char* novousername = strsep(&username,"\n");
 
   double km=0;
@@ -213,13 +213,13 @@ double get_total_gasto(CatRides catalogosrides, CatUser catalogosusers, CatDrive
 
   gpointer key, value;
   GHashTableIter iter;
-  g_hash_table_iter_init(&iter, catalogosrides->Rides); 
+  g_hash_table_iter_init(&iter, catalogos->Rides); 
   while(g_hash_table_iter_next(&iter, &key, &value)){
     Rides ride = value;
 
     char* id = get_driver_Rides(ride);
 
-    Driver drivers = g_hash_table_lookup(catalogodrivers->Driver, id);
+    Driver drivers = g_hash_table_lookup(catalogos->Driver, id);
     char* car_class = g_strdup(get_car_class_driver(drivers));
 
     if(strcmp(novousername,get_user_Rides(ride)) == 0){
@@ -244,7 +244,7 @@ double get_total_gasto(CatRides catalogosrides, CatUser catalogosusers, CatDrive
   return total;
 }
 
-double get_preco_medio_city(CatRides catalogosrides, CatDriver catalogodrivers, char *city){
+double get_preco_medio_city(Catalogos catalogos, char *city){
   char* novacity = strsep(&city,"\n");
 
   double km=0;
@@ -253,13 +253,13 @@ double get_preco_medio_city(CatRides catalogosrides, CatDriver catalogodrivers, 
 
   gpointer key, value;
   GHashTableIter iter;
-  g_hash_table_iter_init(&iter, catalogosrides->Rides); 
+  g_hash_table_iter_init(&iter, catalogos->Rides); 
   while(g_hash_table_iter_next(&iter, &key, &value)){
     Rides ride = value;
 
     char* id = get_driver_Rides(ride);
 
-    Driver drivers = g_hash_table_lookup(catalogodrivers->Driver, id);
+    Driver drivers = g_hash_table_lookup(catalogos->Driver, id);
     char* car_class = g_strdup(get_car_class_driver(drivers));
 
     if(strcmp(novacity,get_city_Rides(ride)) == 0){
@@ -302,7 +302,7 @@ double get_preco_medio_city(CatRides catalogosrides, CatDriver catalogodrivers, 
 
 // }
 
-// double get_preco_medio_data(CatDriver catalogodrivers, CatRides catalogorides, char* data_inicial, char* data_final){
+// double get_preco_medio_data(Catalogos catalogodrivers, Catalogos catalogorides, char* data_inicial, char* data_final){
 //   Data inicial = build_data(data_inicial);
 //   Data final = build_data(data_final);
 

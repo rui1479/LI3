@@ -10,7 +10,7 @@ EXECUTABLE_NAME := programa-principal
 
 all: $(EXECUTABLE_NAME) $(TESTS_EXECUTABLE_NAME)
 
-$(EXECUTABLE_NAME): $(BIN_DIR)/main.o $(BIN_DIR)/data.o $(BIN_DIR)/drivers.o $(BIN_DIR)/getters.o $(BIN_DIR)/parse.o $(BIN_DIR)/queries.o $(BIN_DIR)/rides.o $(BIN_DIR)/user.o $(BIN_DIR)/validadur.o
+$(EXECUTABLE_NAME): $(BIN_DIR)/main.o $(BIN_DIR)/data.o $(BIN_DIR)/drivers.o $(BIN_DIR)/getters.o $(BIN_DIR)/catalogos.o $(BIN_DIR)/queries.o $(BIN_DIR)/rides.o $(BIN_DIR)/user.o $(BIN_DIR)/validadur.o
 	$(CC) $(CFLAGS) $^ $(LDFLAGS) -o $@
 
 $(BIN_DIR):
@@ -28,8 +28,8 @@ $(BIN_DIR)/drivers.o: $(BIN_DIR) $(SRC_DIR)/drivers.c
 $(BIN_DIR)/getters.o: $(BIN_DIR) $(SRC_DIR)/getters.c
 	$(CC) $(CFLAGS) -I$(INC_DIR) -c $(SRC_DIR)/getters.c -o $@
 
-$(BIN_DIR)/parse.o: $(BIN_DIR) $(SRC_DIR)/parse.c
-	$(CC) $(CFLAGS) -I$(INC_DIR) -c $(SRC_DIR)/parse.c -o $@
+$(BIN_DIR)/catalogos.o: $(BIN_DIR) $(SRC_DIR)/catalogos.c
+	$(CC) $(CFLAGS) -I$(INC_DIR) -c $(SRC_DIR)/catalogos.c -o $@
 
 $(BIN_DIR)/queries.o: $(BIN_DIR) $(SRC_DIR)/queries.c
 	$(CC) $(CFLAGS) -I$(INC_DIR) -c $(SRC_DIR)/queries.c -o $@

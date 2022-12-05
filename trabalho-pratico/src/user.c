@@ -57,14 +57,6 @@ char* get_account_status_user(User a) {
   return NULL;
 }
 
-void set_catUser(CatUser c, GHashTable* u){
-  c->user = u;
-}
-
-GHashTable* get_catalogo_users(CatUser c){
-  return c->user;
-}
-
 User build_user(char *line) {
 
     User a = malloc(sizeof(struct user));
