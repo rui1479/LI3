@@ -40,13 +40,8 @@ typedef struct catalogos* Catalogos;
 
 Catalogos carregaCatalogos(FILE* user,FILE* driver, FILE* rides);
 
-GHashTable* get_catalogo_users(CatUser c);
-GHashTable* get_catalogo_drivers(CatDriver c);
-GHashTable* get_catalogo_rides(CatRides c);
-GHashTable* get_catalogo_ridesdriver(CatRides c);
-GHashTable* get_catalogo_ridesuser(CatRides c);
-
 #include "../include/queries.h"
 #include "../include/getters.h"
+#include "../include/menu.h"
 
 #endif                                                                              

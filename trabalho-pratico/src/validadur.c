@@ -5,7 +5,7 @@ int campos_positivos (char *line){
 }
 
 int testa_data (char *line){
-   int dateINT[3], i;
+   int dateINT[3];
 
     if (sscanf(line, "%d/%d/%d", &dateINT[0], &dateINT[1], &dateINT[2]) == 3 ){
         if ((dateINT[0] > 0 && dateINT[0] < 32) && (dateINT[1] > 0 && dateINT[1] < 13) && (dateINT[2] > 1800 && dateINT[2] < 2500 )){

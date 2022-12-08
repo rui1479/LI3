@@ -10,7 +10,7 @@ EXECUTABLE_NAME := programa-principal
 
 all: $(EXECUTABLE_NAME) $(TESTS_EXECUTABLE_NAME)
 
-$(EXECUTABLE_NAME): $(BIN_DIR)/main.o $(BIN_DIR)/data.o $(BIN_DIR)/drivers.o $(BIN_DIR)/getters.o $(BIN_DIR)/catalogos.o $(BIN_DIR)/queries.o $(BIN_DIR)/rides.o $(BIN_DIR)/user.o $(BIN_DIR)/validadur.o
+$(EXECUTABLE_NAME): $(BIN_DIR)/main.o $(BIN_DIR)/data.o $(BIN_DIR)/drivers.o $(BIN_DIR)/getters.o $(BIN_DIR)/catalogos.o $(BIN_DIR)/queries.o $(BIN_DIR)/rides.o $(BIN_DIR)/user.o $(BIN_DIR)/validadur.o $(BIN_DIR)/menu.o
 	$(CC) $(CFLAGS) $^ $(LDFLAGS) -o $@
 
 $(BIN_DIR):
@@ -43,8 +43,14 @@ $(BIN_DIR)/user.o: $(BIN_DIR) $(SRC_DIR)/user.c
 $(BIN_DIR)/validadur.o: $(BIN_DIR) $(SRC_DIR)/validadur.c
 	$(CC) $(CFLAGS) -I$(INC_DIR) -c $(SRC_DIR)/validadur.c -o $@
 
+$(BIN_DIR)/menu.o: $(BIN_DIR) $(SRC_DIR)/menu.c
+	$(CC) $(CFLAGS) -I$(INC_DIR) -c $(SRC_DIR)/menu.c -o $@
+
 run: 
 	./programa-principal Dataset_Fase1 Dataset_Fase1/input.txt  
+
+menu:
+	./programa-principal
 
 clean:
 	rm -rf $(BIN_DIR) $(EXECUTABLE_NAME)

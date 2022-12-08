@@ -18,7 +18,8 @@ int get_numero_viagens(Catalogos catalogos, char *id);
 double get_total_euferido(Catalogos catalogos, char *id);
 
 double get_preco_medio_city(Catalogos catalogos, char *city);
-//double get_preco_medio_data(Catalogos catalogodrivers, Catalogos catalogorides, char* data_inicial, char* data_final);
+double get_preco_medio_data(Catalogos catalogo, char* data_inicial, char* data_final);
+double get_distancia_media_city(Catalogos catalogo, char* city, char* data_inicial, char* data_final);
 
 
 #endif

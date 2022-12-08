@@ -1,5 +1,21 @@
 #include "../include/queries.h"
 
+struct aux_driver{
+    char *id;
+    char* nome;
+    double avaliacao_media;
+};
+
+typedef struct aux_driver* AUX_DRIVER;
+
+int sort_function(gconstpointer a, gconstpointer b) {
+
+    int contadorA = ((AUX_DRIVER) a)->avaliacao_media;
+    int contadorB = ((AUX_DRIVER) b)->avaliacao_media;
+
+    return contadorB - contadorA;
+}
+
 void query1_users(Catalogos catalogo, char *username, int linha){
     char* novousername = strsep(&username,"\n");
     User user = g_hash_table_lookup(catalogo->user, novousername);
@@ -48,6 +64,9 @@ void query1_drivers(Catalogos catalogo, char *id, int linha){
     }
 }
 
+void query2 (Catalogos catalogo, char* N, int linha){
+}
+
 void query4 (Catalogos catalogo, char* city, int linha){
     char buffer[128];
     sprintf(buffer, "Resultados/command%d_output.txt", linha);
@@ -57,13 +76,20 @@ void query4 (Catalogos catalogo, char* city, int linha){
     fclose(query4txt);
 }
 
-// void query5 (CatDriver catalogoDrivers, CatRides catalogoRides, char* data_inicial, char* data_final, int linha){
-//     char* novadatai = strsep(&data_inicial,"\n");
-//     char* novadataf = strsep(&data_final,"\n");
-//     char buffer[128];
-//     sprintf(buffer, "Resultados/command%d_output.txt", linha);
-//     FILE *query5txt = fopen(buffer, "w");
-//     double preco_medio_data = get_preco_medio_data(catalogoDrivers, catalogoRides, novadatai, novadataf);
-//     fprintf(query5txt, "%.3f\n",preco_medio_data);
-//     fclose(query5txt);
-// }
+void query5 (Catalogos catalogo, char* data_inicial, char* data_final, int linha){
+    char buffer[128];
+    sprintf(buffer, "Resultados/command%d_output.txt", linha);
+    FILE *query5txt = fopen(buffer, "w");
+    double preco_medio_data = get_preco_medio_data(catalogo, data_inicial, data_final);
+    fprintf(query5txt, "%.3f\n",preco_medio_data);
+    fclose(query5txt);
+}
+
+void query6 (Catalogos catalogo, char* city, char* data_inicial, char* data_final, int linha){
+    char buffer[128];
+    sprintf(buffer, "Resultados/command%d_output.txt", linha);
+    FILE *query6txt = fopen(buffer, "w");
+    double distancia_media = get_distancia_media_city(catalogo,city,data_inicial,data_final);
+    fprintf(query6txt, "%.3f\n",distancia_media);
+    fclose(query6txt);
+}

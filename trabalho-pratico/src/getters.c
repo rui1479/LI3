@@ -283,60 +283,76 @@ double get_preco_medio_city(Catalogos catalogos, char *city){
   return total;
 }
 
-// int data_aux(Data a, Data b, Data c){
-//    int ano_a = get_ano(a);
-//    int ano_c = get_ano(c);
-//    int mes_a = get_mes(a);
-//    int mes_c = get_mes(c);
-//    int dia_a = get_dia(a);
-//    int dia_c = get_dia(c);
-//    int ano_ref = get_ano(b);
-//    int mes_ref = get_mes(b);
-//    int dia_ref = get_dia(b);
-//   if(ano_ref > ano_a || ano_ref == ano_a && mes_ref > mes_a ||ano_ref == ano_a && mes_ref == mes_a && dia_ref > dia_a){
-//       if(ano_ref < ano_c || ano_ref == ano_c && mes_ref < mes_c || ano_ref == ano_c && mes_ref == mes_c && dia_ref < dia_c ){
-//         return 1;
-//       }
-//   } 
+double get_preco_medio_data(Catalogos catalogo, char* data_inicial, char* data_final){
 
-// }
+  Data inicial = build_data(data_inicial);
+  Data final = build_data(data_final);
 
-// double get_preco_medio_data(Catalogos catalogodrivers, Catalogos catalogorides, char* data_inicial, char* data_final){
-//   Data inicial = build_data(data_inicial);
-//   Data final = build_data(data_final);
 
-//   int contador = 0;
-//   int km = 0;
-//   double total = 0;
+  int contador = 0;
+  int km = 0;
+  double total = 0;
 
-//    gpointer key, value;
-//    GHashTableIter iter;
-//    g_hash_table_iter_init(&iter, catalogorides->Rides); 
-//    while(g_hash_table_iter_next(&iter, &key, &value)){
-//      Rides ride = value;
-//      char* id = get_driver_Rides(ride);
+   gpointer key, value;
+   GHashTableIter iter;
 
-//      Driver drivers = g_hash_table_lookup(catalogodrivers->Driver, id);
-//      char* car_class = g_strdup(get_car_class_driver(drivers));
-//      char* data_ref = get_date_Rides(ride);
+   g_hash_table_iter_init(&iter, catalogo->Rides); 
+   while(g_hash_table_iter_next(&iter, &key, &value)){
+     Rides ride = value;
+     char* id = get_driver_Rides(ride);
 
-//      Data data_a_comparar = build_data(data_ref);
+     Driver drivers = g_hash_table_lookup(catalogo->Driver, id);
+     char* car_class = g_strdup(get_car_class_driver(drivers));
+     char* data_ref = get_date_Rides(ride);
 
-//      if(data_aux(inicial,data_a_comparar,final)){
-//         km = atoi(get_distance_Rides(ride));
-//         if(strcmp("green",car_class)==0){
-//           total += 4 + 0.79 * km;
-//         }
+    Data data_a_comparar = build_data(data_ref);
+    
+     if(compara_datas(data_a_comparar,inicial) && compara_datas(final,data_a_comparar)){
+        contador++;
+          km = atoi(get_distance_Rides(ride));
 
-//         if(strcmp("basic",car_class)==0){
-//           total += 3.25 + 0.62 * km;
-//         }
-          
-//         if(strcmp("premium",car_class)==0){
-//           total += 5.20 + 0.94 * km;
-//       }
-//       contador++;
-//     }
-//   }
-// return 0;
-// }
+          if(strcmp("green",car_class)==0){
+            total += 4 + 0.79 * km;
+          }
+
+          if(strcmp("basic",car_class)==0){
+            total += 3.25 + 0.62 * km;
+          }
+            
+          if(strcmp("premium",car_class)==0){
+            total += 5.20 + 0.94 * km;
+          }       
+    }
+  }
+  total = total / contador;
+return total;
+}
+
+double get_distancia_media_city(Catalogos catalogo, char* city, char* data_inicial, char* data_final){
+  Data inicial = build_data(data_inicial);
+  Data final = build_data(data_final);
+
+  int contador = 0;
+  int km = 0;
+  double total = 0;
+
+   gpointer key, value;
+   GHashTableIter iter;
+   g_hash_table_iter_init(&iter, catalogo->Rides); 
+   while(g_hash_table_iter_next(&iter, &key, &value)){
+     Rides ride = value;
+     char* data_ref = get_date_Rides(ride);
+
+    Data data_a_comparar = build_data(data_ref);
+    
+     if(compara_datas(data_a_comparar,inicial) && compara_datas(final,data_a_comparar) && strcmp(city,get_city_Rides(ride)) == 0){
+      km += atoi(get_distance_Rides(ride));
+      contador++;
+     }
+  }
+  printf("%i\n",km);
+  printf("%i",contador);
+  total = (double)km / contador;
+
+  return total;
+}

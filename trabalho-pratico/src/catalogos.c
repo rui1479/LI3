@@ -109,26 +109,3 @@ Catalogos carregaCatalogos(FILE* user,FILE* driver, FILE* rides){
     cat->RidesUser = catalogoRides->RidesUser;
     return cat;
 }
-
-// ------------------------------------------------------------------------Getters Hash Table -----------------------------------------------------------------------------------------
-
-GHashTable* get_catalogo_drivers(CatDriver c){
-    return c->Driver;
-}
-
-GHashTable* get_catalogo_ridesuser(CatRides c){
-  return c->RidesUser;
-}
-
-GHashTable* get_catalogo_ridesdriver(CatRides c){
-  return c->RidesDriver;
-}
-
-GHashTable* get_catalogo_rides(CatRides c){
-  return c->Rides;
-}
-
-GHashTable* get_catalogo_users(CatUser c){
-  return c->user;
-}
-

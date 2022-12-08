@@ -7,15 +7,19 @@ struct data{
 };
 
 int get_dia (Data a){
-        return a->dia;
+    return a->dia;
 }
 
 int get_mes (Data a){
-        return a->mes;
+    return a->mes;
 }
 
 int get_ano (Data a){
     return a->ano;
+}
+
+int compara_datas(Data a, Data b){
+    return (get_ano(a) > get_ano(b) || get_ano(a) == get_ano(b) && get_mes(a) > get_mes(b) || get_ano(a) == get_ano(b) && get_mes(a) == get_mes(b) && get_dia(a) > get_dia(b) || get_ano(a) == get_ano(b) && get_mes(a) == get_mes(b) && get_dia(a) == get_dia(b));
 }
 
 Data build_data(char *line){

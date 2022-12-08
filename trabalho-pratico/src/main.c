@@ -12,92 +12,192 @@ int main(int argc, char* argv[]){
     double cpu_time_used;
 
     start = clock();
-    
-    // cria string com o path completo 
-    char *usersfile = malloc(strlen(argv[1])+strlen("users.csv")+1000);
-        strcpy(usersfile,argv[1]);
-        strcat(usersfile,"/users.csv");
 
-    char *driversfile= malloc(strlen(argv[1])+strlen("drivers.csv")+1000);
-        strcpy(driversfile,argv[1]);
-        strcat(driversfile,"/drivers.csv");
+    if(argc==1){
 
-    char *ridesfile = malloc(strlen(argv[1])+strlen("rides.csv")+1000);
-        strcpy(ridesfile,argv[1]);
-        strcat(ridesfile,"/rides.csv");
-    
+        // char *usersfile = malloc(sizeof(usersfile));
+        // char *driversfile = malloc(sizeof(driversfile));
+        // char *ridesfile = malloc(sizeof(ridesfile));
+        int menu = 1, opcao;
+        char opcaoA[1];
 
-    FILE* fileUser = fopen(usersfile,"r");
-    FILE* fileDriver = fopen(driversfile,"r");
-    FILE* fileRides = fopen(ridesfile,"r");
-    FILE* f = fopen(argv[2],"r");
-    
-    Catalogos catalogos = carregaCatalogos(fileUser,fileDriver,fileRides);
+        // printf("Introduza o caminho para a pasta onde estão os ficheiros de entrada(users, drivers e rides respetivamente):\n");
+        // scanf("%s %s %s", usersfile,driversfile, ridesfile);
 
-    char buff[MAXL];
-    int i = 1;
-    int j = 0;
-    while(fgets(buff, MAXL, f)){
-        char *string = g_strdup(buff);
-        char *query;
-        char *arg1;
-        char *arg2;
-        char *arg3;
-        char *arg4;
-        if((query = (char*)g_strdup(strsep(&string, " ")))!= NULL){
-            if((arg1 = (char*)g_strdup(strsep(&string, " "))) != NULL){
-                if((arg2 = (char*)g_strdup(strsep(&string, " "))) != NULL){
-                    if((arg3 = (char*)strsep(&string, " ")) != NULL){
-                        if((arg4 = (char*)strsep(&string, " ")) != NULL){
-                        }
-                        else{ // queries com 3 argumentos apenas temos a 6
-                            //query6();
-                        }
-                    }
-                    else{ // queries com 2 argumentos
-                        if(atoi(query) == 5){ // então é a query 5
-                            //query5(catalogoDrivers,catalogoRides,arg1,arg2,i);
-                        }
-                        else if(atoi(query) == 7){// então é a 7
-                            //query7();
-                        }
-                        else if(atoi(query) == 8){// então é a 8
-                            //query8();
-                        }
-                        else if(atoi(query) == 9){// então é a 9
-                            //query9();
-                    }
+        char *usersfile = "Dataset_Fase1/users.csv";
+        char *driversfile = "Dataset_Fase1/drivers.csv";
+        char *ridesfile = "Dataset_Fase1/rides.csv";
+
+        FILE* fileUser = fopen(usersfile,"r");
+        FILE* fileDriver = fopen(driversfile,"r");
+        FILE* fileRides = fopen(ridesfile,"r");
+
+        Catalogos catalogos = carregaCatalogos(fileUser,fileDriver,fileRides);
+
+        while(menu!=0){
+            printMenuPrincipal();
+            printf("\nInsira a opção pretendida: ");
+            scanf("%s", opcaoA);
+
+            while(!isdigit(opcaoA[0])){
+                printMenuPrincipal();
+                printf("\nOpção inválida, tente novamente: ");
+                scanf("%s", opcaoA);
+            }
+
+            opcao = atoi(opcaoA);
+
+            if (opcao == 0){
+                menu = 0; printf("Obrigado!\n");
+            }
+            else if(opcao == 1){
+                char* id = malloc(sizeof(id));
+                printf("\nInsira o id/username pretendido: ");
+                scanf("%s",id);
+                if(isdigit(id[0])){
+                    printQuerie1_D(catalogos,id);
+                    menu = printSubMenu();
                 }
+                else {
+                    printQuerie1_U(catalogos,id);
+                    menu = printSubMenu();
                 }
-                else{ // queries com 1 argumentos
-                    if(atoi(query) == 1){ // então é a query 1
-                        if(isdigit(arg1[j])){
-                            query1_drivers(catalogos, arg1,i);
+            }
+            else if(opcao == 2){
+
+            }
+            else if(opcao == 3){
+                
+            }
+            else if(opcao == 4){
+                char* city = malloc(sizeof(city));
+                printf("\nInsira a cidade pretendida: ");
+                scanf("%s",city);
+                printQuerie4(catalogos,city);
+                menu = printSubMenu();
+            }
+            else if(opcao == 5){
+                char* data_i = malloc(sizeof(data_i));
+                char* data_f = malloc(sizeof(data_f));
+                printf("\nInsira a Data inicial pretendida(DD/MM/ANO): ");
+                scanf("%s",data_i);
+                printf("\nInsira a Data Final pretendida(DD/MM/ANO): ");
+                scanf("%s",data_f);
+                printQuerie5(catalogos,data_i,data_f);
+                menu = printSubMenu();
+            }
+            else if(opcao == 6){
+                char* data_i = malloc(sizeof(data_i));
+                char* data_f = malloc(sizeof(data_f));
+                char* city = malloc(sizeof(city));
+                printf("\nInsira a cidade pretendida: ");
+                scanf("%s",city);
+                printf("\nInsira a Data inicial pretendida(DD/MM/ANO): ");
+                scanf("%s",data_i);
+                printf("\nInsira a Data Final pretendida(DD/MM/ANO): ");
+                scanf("%s",data_f);
+                printQuerie6(catalogos,city,data_i,data_f);
+                menu = printSubMenu();
+            }
+            else if(opcao == 7){
+                
+            }
+            else if(opcao == 8){
+                
+            }
+            else if(opcao == 9){
+                
+            }
+        }
+
+    }
+    
+    if (argc==3){
+            // cria string com o path completo 
+        char *usersfile = malloc(strlen(argv[1])+strlen("users.csv")+1000);
+            strcpy(usersfile,argv[1]);
+            strcat(usersfile,"/users.csv");
+
+        char *driversfile= malloc(strlen(argv[1])+strlen("drivers.csv")+1000);
+            strcpy(driversfile,argv[1]);
+            strcat(driversfile,"/drivers.csv");
+
+        char *ridesfile = malloc(strlen(argv[1])+strlen("rides.csv")+1000);
+            strcpy(ridesfile,argv[1]);
+            strcat(ridesfile,"/rides.csv");
+        
+
+        FILE* fileUser = fopen(usersfile,"r");
+        FILE* fileDriver = fopen(driversfile,"r");
+        FILE* fileRides = fopen(ridesfile,"r");
+        FILE* f = fopen(argv[2],"r");
+        
+        Catalogos catalogos = carregaCatalogos(fileUser,fileDriver,fileRides);
+
+        char buff[MAXL];
+        int i = 1;
+        int j = 0;
+        while(fgets(buff, MAXL, f)){
+            char *string = g_strdup(buff);
+            char *query;
+            char *arg1;
+            char *arg2;
+            char *arg3;
+            char *arg4;
+            if((query = (char*)g_strdup(strsep(&string, " ")))!= NULL){
+                if((arg1 = (char*)g_strdup(strsep(&string, " "))) != NULL){
+                    if((arg2 = (char*)g_strdup(strsep(&string, " "))) != NULL){
+                        if((arg3 = (char*)strsep(&string, " ")) != NULL){
+                            if((arg4 = (char*)strsep(&string, " ")) != NULL){
+                            }
+                            else{ // queries com 3 argumentos apenas temos a 6
+                                query6(catalogos,arg1,arg2,arg3,i);
+                            }
                         }
-                        else{
-                            query1_users(catalogos, arg1,i);
+                        else{ // queries com 2 argumentos
+                            if(atoi(query) == 5){ // então é a query 5
+                                query5(catalogos,arg1,arg2,i);
+                            }
+                            else if(atoi(query) == 7){// então é a 7
+                                //query7();
+                            }
+                            else if(atoi(query) == 8){// então é a 8
+                                //query8();
+                            }
+                            else if(atoi(query) == 9){// então é a 9
+                                //query9();
                         }
                     }
-                    else if(atoi(query) == 2){ // então é a query 2
-                        //query2();
                     }
-                    else if(atoi(query) == 3){ // então é a query 3
-                        //query3();
-                    }
-                    else if(atoi(query) == 4){ // então é a query 4
-                             query4(catalogos,arg1,i);
+                    else{ // queries com 1 argumentos
+                        if(atoi(query) == 1){ // então é a query 1
+                            if(isdigit(arg1[j])){
+                                query1_drivers(catalogos, arg1,i);
+                            }
+                            else{
+                                query1_users(catalogos, arg1,i);
+                            }
+                        }
+                        else if(atoi(query) == 2){ // então é a query 2
+                                query2(catalogos, arg1, i);
+                        }
+                        else if(atoi(query) == 3){ // então é a query 3
+                                //query3();
+                        }
+                        else if(atoi(query) == 4){ // então é a query 4
+                                query4(catalogos,arg1,i);
+                        }
                     }
                 }
             }
+            i++;
         }
-        i++;
+
+        free(catalogos);
+        free(usersfile);
+        free(driversfile);
+        free(ridesfile);
     }
-
-    free(catalogos);
-    free(usersfile);
-    free(driversfile);
-    free(ridesfile);
-
     end = clock();
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
     printf("Demorou %.2f segundos!\n", cpu_time_used);
