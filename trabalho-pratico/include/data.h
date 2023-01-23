@@ -15,4 +15,6 @@ int compara_datas(Data a, Data b);
 
 Data build_data(char *line);
 
+void print_data(Data a);
+
 #endif

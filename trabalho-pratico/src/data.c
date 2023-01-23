@@ -32,3 +32,10 @@ Data build_data(char *line){
 
     return a;
 }
+
+void print_data(Data a) {
+    printf("%i | %i | %i \n",
+        a -> dia,
+        a -> mes,
+        a -> ano);
+}

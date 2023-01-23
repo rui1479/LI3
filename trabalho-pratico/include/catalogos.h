@@ -17,8 +17,6 @@ struct catalog_driver {
 
 struct catalog_rides {
     GHashTable* Rides;
-    GHashTable* RidesUser;
-    GHashTable* RidesDriver;
 };
 
 struct catalog_user {
@@ -28,8 +26,6 @@ struct catalog_user {
 struct catalogos {
     GHashTable* Driver;
     GHashTable* Rides;
-    GHashTable* RidesUser;
-    GHashTable* RidesDriver;
     GHashTable* user;
 };
 

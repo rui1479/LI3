@@ -3,18 +3,20 @@
 struct aux_driver{
     char *id;
     char* nome;
-    double avaliacao_media;
+    double avaliacao;
+    int contador;
 };
 
+struct aux_user{
+    char *username;
+    char *nome;
+    int distotal;
+    Data viagem_recente;
+};
+
+
 typedef struct aux_driver* AUX_DRIVER;
-
-int sort_function(gconstpointer a, gconstpointer b) {
-
-    int contadorA = ((AUX_DRIVER) a)->avaliacao_media;
-    int contadorB = ((AUX_DRIVER) b)->avaliacao_media;
-
-    return contadorB - contadorA;
-}
+typedef struct aux_user* AUX_USER;
 
 void query1_users(Catalogos catalogo, char *username, int linha){
     char* novousername = strsep(&username,"\n");
@@ -65,6 +67,25 @@ void query1_drivers(Catalogos catalogo, char *id, int linha){
 }
 
 void query2 (Catalogos catalogo, char* N, int linha){
+    char buffer[128];
+    sprintf(buffer, "Resultados/command%d_output.txt", linha);
+    FILE *query2txt = fopen(buffer, "w");
+    GList* sorted = auxquerie2(catalogo);
+    for (size_t i = 0; i < atoi(N); i++) {
+        AUX_DRIVER driver = g_list_nth_data(sorted, i);
+        fprintf(query2txt, "%s;%s;%.3f\n", driver->id,driver->nome,(driver->avaliacao)/(driver->contador));
+    }
+}
+
+void query3 (Catalogos catalogo, char* N, int linha){
+    char buffer[128];
+    sprintf(buffer, "Resultados/command%d_output.txt", linha);
+    FILE *query3txt = fopen(buffer, "w");
+    GList* sorted = auxquerie3(catalogo);
+    for (size_t i = 0; i < atoi(N); i++) {
+        AUX_USER user = g_list_nth_data(sorted, i);
+        fprintf(query3txt, "%s;%s;%i\n", user->username, user->nome, user->distotal);
+    }
 }
 
 void query4 (Catalogos catalogo, char* city, int linha){

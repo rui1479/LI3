@@ -1,6 +1,66 @@
 #include "../include/getters.h"
 #define ANO "09/10/2022"
 
+struct aux_driver{
+    char *id;
+    char* nome;
+    double avaliacao;
+    int contador;
+    Data viagem_recente;
+};
+
+struct aux_user{
+    char *username;
+    char *nome;
+    int distotal;
+    int ativo;
+    Data viagem_recente;
+};
+
+
+int sort_function_driver(gconstpointer a, gconstpointer b){
+    struct aux_driver *da = (struct aux_driver *)a;
+    struct aux_driver *db = (struct aux_driver *)b;
+
+    double avaliacao_a = da->avaliacao / da->contador;
+    double avaliacao_b = db->avaliacao / db->contador;
+
+    Data data_a = da->viagem_recente;
+    Data data_b = db->viagem_recente;
+
+    if (avaliacao_a < avaliacao_b) return 1;
+    else if (avaliacao_a > avaliacao_b) return -1;
+    else if (compara_datas(data_a,data_b)) return -1;
+    else if (!compara_datas(data_a,data_b)) return 1;
+    else return strcmp(da->id, db->id);
+}
+
+int sort_function_user(gconstpointer a, gconstpointer b){
+    struct aux_user *ua = (struct aux_user *)a;
+    struct aux_user *ub = (struct aux_user *)b;
+
+    Data data_a = ua->viagem_recente;
+    Data data_b = ub->viagem_recente;
+
+    if (ua->distotal < ub->distotal) return 1;
+    else if (ua->distotal > ub->distotal) return -1;
+    else if (compara_datas(data_a,data_b)) return -1;
+    else if (!compara_datas(data_a,data_b)) return 1;
+    else return strcmp(ua->username, ub->username);
+}
+
+GList *remove_users(GList *list) {
+    GList *current = list;
+    while (current) {
+        struct aux_user *user = (struct aux_user *) current->data;
+        if (user->ativo == 0) {
+            current = g_list_remove(list, current->data);
+            continue;
+        }
+        current = g_list_next(current);
+    }
+    return list;
+}
 
 //-------------------------------------------------------------------------USERS----------------------------------------------------------------------------------------------------------------
 
@@ -90,6 +150,8 @@ int get_idade_list_driver(Catalogos catalogos, char* id){
   }
   return idade;
 }
+
+
 
 //-------------------------------------------------------------------------RIDES-DRIVER----------------------------------------------------------------------------------------------------------------
 
@@ -355,4 +417,72 @@ double get_distancia_media_city(Catalogos catalogo, char* city, char* data_inici
   total = (double)km / contador;
 
   return total;
+}
+
+GList* auxquerie2 (Catalogos catalogo){
+  GHashTable* map = g_hash_table_new(g_str_hash, g_str_equal);
+    gpointer keyQuery2, valueQuery2;
+    GHashTableIter iterQuery2;
+
+    g_hash_table_iter_init(&iterQuery2,catalogo->Rides);
+    while(g_hash_table_iter_next(&iterQuery2, &keyQuery2, &valueQuery2)) {
+        Rides ride = valueQuery2;
+        if(!g_hash_table_contains(map,get_driver_Rides(ride))){
+            AUX_DRIVER elem = malloc(sizeof(struct aux_driver));
+            elem->id = get_driver_Rides(ride);
+            Driver drivers = g_hash_table_lookup(catalogo->Driver, elem->id);
+            elem->nome = get_name_driver(drivers);
+            elem->avaliacao = atof(get_score_driver_Rides(ride));
+            elem->contador = 1;
+            elem->viagem_recente = build_data(get_date_Rides(ride));
+            g_hash_table_insert(map, elem->id, elem);
+        }
+        else {
+            AUX_DRIVER elem = g_hash_table_lookup(map,get_driver_Rides(ride));
+            elem->avaliacao = elem->avaliacao + atof(get_score_driver_Rides(ride));
+            Data acomparar = build_data(get_date_Rides(ride));
+            elem->viagem_recente = compara_datas(elem->viagem_recente,acomparar) ? elem->viagem_recente : acomparar;
+            elem->contador++;
+            g_hash_table_insert(map, elem->id, elem);
+        }
+    }
+    
+    GList* list = g_hash_table_get_values(map);
+    GList* sorted = g_list_sort(list, sort_function_driver);
+
+    return sorted;
+}
+
+GList* auxquerie3 (Catalogos catalogo){
+  GHashTable* map = g_hash_table_new(g_str_hash, g_str_equal);
+    gpointer keyQuery3, valueQuery3;
+    GHashTableIter iterQuery3;
+
+    g_hash_table_iter_init(&iterQuery3,catalogo->Rides);
+    while(g_hash_table_iter_next(&iterQuery3, &keyQuery3, &valueQuery3)) {
+        Rides ride = valueQuery3;
+        if(!g_hash_table_contains(map,get_user_Rides(ride))){
+            AUX_USER elem = malloc(sizeof(struct aux_user));
+            elem->username = get_user_Rides(ride);
+            User user = g_hash_table_lookup(catalogo->user, elem->username);
+            elem->nome = get_name_user(user);
+            elem->distotal = atoi(get_distance_Rides(ride));
+            elem->viagem_recente = build_data(get_date_Rides(ride));
+            elem->ativo = strcmp(get_account_status_user(user),"active") == 0 ? 1 : 0;
+            g_hash_table_insert(map, elem->username, elem);
+        }
+        else {
+            AUX_USER elem = g_hash_table_lookup(map,get_user_Rides(ride));
+            elem->distotal = elem->distotal + atoi(get_distance_Rides(ride));
+            Data acomparar = build_data(get_date_Rides(ride));
+            elem->viagem_recente = compara_datas(elem->viagem_recente,acomparar) ? elem->viagem_recente : acomparar;
+            g_hash_table_insert(map, elem->username, elem);
+        }
+    }
+    
+    GList* list = g_hash_table_get_values(map);
+    GList* sorted = g_list_sort(list, sort_function_user);
+    GList* final = remove_users(sorted);
+
+    return final;
 }

@@ -7,7 +7,7 @@ CatUser parseUser(FILE* fileUser){
     CatUser catalogoUser = malloc(sizeof(CatUser)*10);
     GHashTable* user = g_hash_table_new(g_str_hash, g_str_equal);
 
-    int max_length = 1024000;
+    int max_length = 200;
     char buff[max_length];
 
     if(fileUser == NULL){
@@ -38,7 +38,7 @@ CatRides parseRides(FILE* fileRides){
     GHashTable* ridesuser = g_hash_table_new(g_str_hash, g_str_equal);
     GHashTable* ridesdriver = g_hash_table_new(g_str_hash, g_str_equal);
     
-    int max_length = 1024000;
+    int max_length = 200;
     char buff[max_length];
 
     if(fileRides == NULL){
@@ -50,14 +50,10 @@ CatRides parseRides(FILE* fileRides){
         Rides r = build_Rides(buff);
         if(testrides(r)){
         g_hash_table_insert(rides, get_id_Rides(r), r); // key é o id do rides
-        g_hash_table_insert(ridesuser, get_user_Rides(r), r); // key é o user do rides
-        g_hash_table_insert(ridesdriver, get_driver_Rides(r), r);  // key é o driver do rides
         }
     } 
 
     catalogoRides->Rides = rides;
-    catalogoRides->RidesDriver = ridesdriver;
-    catalogoRides->RidesUser = ridesuser;
 
     //printf("Rides: %i\n",g_hash_table_size(catalogoRides->Rides));
 
@@ -71,7 +67,7 @@ CatDriver parseDrivers(FILE* fileDriver){
     CatDriver catalogoDriver = malloc(sizeof(CatDriver) * 10);
     GHashTable* driver = g_hash_table_new(g_str_hash, g_str_equal);
 
-    int max_length = 1024000;
+    int max_length = 200;
     char buff[max_length];
 
     if(fileDriver == NULL){
@@ -104,8 +100,6 @@ Catalogos carregaCatalogos(FILE* user,FILE* driver, FILE* rides){
     CatRides catalogoRides = parseRides(rides);
     cat->Driver = catalogoDrivers->Driver;
     cat->user = catalogoUsers->user;
-    cat->RidesDriver = catalogoRides->RidesDriver;
     cat->Rides = catalogoRides->Rides;
-    cat->RidesUser = catalogoRides->RidesUser;
     return cat;
 }

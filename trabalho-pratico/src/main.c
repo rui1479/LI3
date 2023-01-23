@@ -15,18 +15,18 @@ int main(int argc, char* argv[]){
 
     if(argc==1){
 
-        // char *usersfile = malloc(sizeof(usersfile));
-        // char *driversfile = malloc(sizeof(driversfile));
-        // char *ridesfile = malloc(sizeof(ridesfile));
+         char *usersfile = malloc(sizeof(usersfile));
+         char *driversfile = malloc(sizeof(driversfile));
+         char *ridesfile = malloc(sizeof(ridesfile));
         int menu = 1, opcao;
         char opcaoA[1];
 
-        // printf("Introduza o caminho para a pasta onde estão os ficheiros de entrada(users, drivers e rides respetivamente):\n");
-        // scanf("%s %s %s", usersfile,driversfile, ridesfile);
+         printf("Introduza o caminho para a pasta onde estão os ficheiros de entrada(users, drivers e rides respetivamente):\n");
+         scanf("%s %s %s", usersfile,driversfile, ridesfile);
 
-        char *usersfile = "Dataset_Fase1/users.csv";
-        char *driversfile = "Dataset_Fase1/drivers.csv";
-        char *ridesfile = "Dataset_Fase1/rides.csv";
+        // char *usersfile = "Dataset_Fase1/users.csv";
+        // char *driversfile = "Dataset_Fase1/drivers.csv";
+        // char *ridesfile = "Dataset_Fase1/rides.csv";
 
         FILE* fileUser = fopen(usersfile,"r");
         FILE* fileDriver = fopen(driversfile,"r");
@@ -39,9 +39,10 @@ int main(int argc, char* argv[]){
             printf("\nInsira a opção pretendida: ");
             scanf("%s", opcaoA);
 
-            while(!isdigit(opcaoA[0])){
+            while (!isdigit(opcaoA[0])) {
+                printf("\nOpção inválida!\n");
                 printMenuPrincipal();
-                printf("\nOpção inválida, tente novamente: ");
+                printf("\nInsira a opção pretendida: ");
                 scanf("%s", opcaoA);
             }
 
@@ -64,10 +65,18 @@ int main(int argc, char* argv[]){
                 }
             }
             else if(opcao == 2){
-
+                char* n = malloc(sizeof(n));
+                printf("\nInsira o numero de condutores que deseja listar: ");
+                scanf("%s",n);
+                printQuerie2(catalogos,n);
+                menu = printSubMenu();
             }
             else if(opcao == 3){
-                
+                char* n = malloc(sizeof(n));
+                printf("\nInsira o numero de condutores que deseja listar: ");
+                scanf("%s",n);
+                printQuerie3(catalogos,n);
+                menu = printSubMenu();
             }
             else if(opcao == 4){
                 char* city = malloc(sizeof(city));
@@ -107,6 +116,9 @@ int main(int argc, char* argv[]){
             }
             else if(opcao == 9){
                 
+            }
+            else {
+                printf("\nOpção inválida!\n");
             }
         }
 
@@ -182,7 +194,7 @@ int main(int argc, char* argv[]){
                                 query2(catalogos, arg1, i);
                         }
                         else if(atoi(query) == 3){ // então é a query 3
-                                //query3();
+                                query3(catalogos, arg1, i);
                         }
                         else if(atoi(query) == 4){ // então é a query 4
                                 query4(catalogos,arg1,i);
