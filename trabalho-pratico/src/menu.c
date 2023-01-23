@@ -15,6 +15,20 @@ struct aux_user{
     Data viagem_recente;
 };
 
+struct aux_q9{
+    char *id;
+    Data data_viagem;
+    char *distancia;
+    char *cidade;
+    char *tip;
+};
+
+struct data{
+    int dia;
+    int mes;
+    int ano;
+};
+
 void printMenuPrincipal(){
     printf("\n-------------------------------------------------------------------------------------\n");
     printf("|1|                       Resumo de um perfil registado no serviço                    |\n");
@@ -147,5 +161,16 @@ void printQuerie6(Catalogos catalogo, char* city, char* data_inicial, char* data
     double distancia_media = get_distancia_media_city(catalogo,city,data_inicial,data_final);
     printf("\n------------------------------------------- QUERY 6 -----------------------------------------------\n");
     printf("A distancia media da cidade %s no intervalo de tempo inserido é: %.3f\n", city, distancia_media);
+    printf("-----------------------------------------------------------------------------------------------------\n");
+}
+
+void printQuerie9(Catalogos catalogo, char* data_inicial, char* data_final){
+    GList* sorted = auxquerie9(catalogo,data_inicial,data_final);
+    printf("\n--------------------------------------- QUERY 9 -----------------------------------------------\n");
+    int tamanho = g_list_length(sorted);
+    for (size_t i = 0; i < tamanho; i++) {
+        AUX_Q9 ride = g_list_nth_data(sorted, i);
+        printf( "%s;%i/%i/%i;%s;%s,%s\n", ride->id, ride->data_viagem->dia, ride->data_viagem->mes, ride->data_viagem->ano, ride->distancia, ride->cidade,ride->tip);
+    }
     printf("-----------------------------------------------------------------------------------------------------\n");
 }

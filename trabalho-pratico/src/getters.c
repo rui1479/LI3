@@ -1,6 +1,8 @@
 #include "../include/getters.h"
 #define ANO "09/10/2022"
 
+//-------------------------------------------------------------------------STRUCTS----------------------------------------------------------------------------------------------------------------
+
 struct aux_driver{
     char *id;
     char* nome;
@@ -17,6 +19,16 @@ struct aux_user{
     Data viagem_recente;
 };
 
+struct aux_q9{
+    char *id;
+    Data data_viagem;
+    char *distancia;
+    char *cidade;
+    char *tip;
+};
+
+//-------------------------------------------------------------------------FUNÇÕES AUXILIARES----------------------------------------------------------------------------------------------------------------
+
 
 int sort_function_driver(gconstpointer a, gconstpointer b){
     struct aux_driver *da = (struct aux_driver *)a;
@@ -30,8 +42,8 @@ int sort_function_driver(gconstpointer a, gconstpointer b){
 
     if (avaliacao_a < avaliacao_b) return 1;
     else if (avaliacao_a > avaliacao_b) return -1;
-    else if (compara_datas(data_a,data_b)) return -1;
-    else if (!compara_datas(data_a,data_b)) return 1;
+    else if (compara_datas(data_a,data_b)) return 1;
+    else if (!compara_datas(data_a,data_b)) return -1;
     else return strcmp(da->id, db->id);
 }
 
@@ -48,6 +60,21 @@ int sort_function_user(gconstpointer a, gconstpointer b){
     else if (!compara_datas(data_a,data_b)) return 1;
     else return strcmp(ua->username, ub->username);
 }
+
+// int sort_function_q9(gconstpointer a, gconstpointer b){
+//     struct aux_q9 *ra = (struct aux_q9 *)a;
+//     struct aux_q9 *rb = (struct aux_q9 *)b;
+
+//     Data data_a = ra->data_viagem;
+//     Data data_b = rb->data_viagem;
+
+//     if (atoi(ra->distancia) < atoi(rb->distancia)) return 1;
+//     else if (atoi(ra->distancia) > atoi(rb->distancia)) return -1;
+//     else if (compara_datas(data_a,data_b)) return -1;
+//     else if (!compara_datas(data_a,data_b)) return 1;
+//     else return strcmp(rb->id, ra->id);
+// }
+
 
 GList *remove_users(GList *list) {
     GList *current = list;
@@ -450,11 +477,14 @@ GList* auxquerie2 (Catalogos catalogo){
     GList* list = g_hash_table_get_values(map);
     GList* sorted = g_list_sort(list, sort_function_driver);
 
+    g_list_free(list);
+    g_hash_table_destroy(map);
+
     return sorted;
 }
 
 GList* auxquerie3 (Catalogos catalogo){
-  GHashTable* map = g_hash_table_new(g_str_hash, g_str_equal);
+    GHashTable* map = g_hash_table_new(g_str_hash, g_str_equal);
     gpointer keyQuery3, valueQuery3;
     GHashTableIter iterQuery3;
 
@@ -484,5 +514,37 @@ GList* auxquerie3 (Catalogos catalogo){
     GList* sorted = g_list_sort(list, sort_function_user);
     GList* final = remove_users(sorted);
 
+    //g_list_free(list);
+    //g_list_free(sorted);
+    //g_hash_table_destroy(map);
+
     return final;
+}
+
+GList* auxquerie9 (Catalogos catalogo,char* data_inicial, char* data_final){
+    GHashTable* map = g_hash_table_new(g_str_hash, g_str_equal);
+    gpointer keyQuery9, valueQuery9;
+    GHashTableIter iterQuery9;
+
+    Data inicial = build_data(data_inicial);
+    Data final = build_data(data_final);
+
+    g_hash_table_iter_init(&iterQuery9,catalogo->Rides);
+    while(g_hash_table_iter_next(&iterQuery9, &keyQuery9, &valueQuery9)) {
+        Rides ride = valueQuery9;
+        Data data_a_comparar = build_data(get_date_Rides(ride));
+        if(compara_datas(data_a_comparar,inicial) && compara_datas(final,data_a_comparar)){
+            AUX_Q9 elem = malloc(sizeof(struct aux_q9));
+            elem->id = get_id_Rides(ride);
+            elem->data_viagem = build_data(get_date_Rides(ride));
+            elem->distancia = get_distance_Rides(ride);
+            elem->cidade = get_city_Rides(ride);
+            elem->tip = get_tip_Rides(ride);
+            g_hash_table_insert(map, elem->id, elem);
+        }
+    }
+    GList* list = g_hash_table_get_values(map);
+    GList* sorted = g_list_sort(list, sort_function_q9);
+
+    return sorted;
 }

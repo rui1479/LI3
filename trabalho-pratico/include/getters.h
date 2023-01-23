@@ -2,10 +2,14 @@
 #define GETTERS_H
 
 #include "../include/catalogos.h"
+#include <string.h>
+#include <time.h>
 
 typedef struct aux_driver* AUX_DRIVER;
 
 typedef struct aux_user* AUX_USER;
+
+typedef struct aux_q9* AUX_Q9;
 
 char* get_name_list_user(Catalogos catalogos, char* username);
 char* get_gender_list_user(Catalogos catalogos, char* username);
@@ -27,5 +31,6 @@ double get_distancia_media_city(Catalogos catalogo, char* city, char* data_inici
 
 GList* auxquerie2 (Catalogos catalogo);
 GList* auxquerie3 (Catalogos catalogo);
+GList* auxquerie9 (Catalogos catalogo,char* data_inicial, char* data_final);
 
 #endif

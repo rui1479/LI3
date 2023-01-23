@@ -15,14 +15,14 @@ int main(int argc, char* argv[]){
 
     if(argc==1){
 
-         char *usersfile = malloc(sizeof(usersfile));
-         char *driversfile = malloc(sizeof(driversfile));
-         char *ridesfile = malloc(sizeof(ridesfile));
+        char *usersfile = malloc(sizeof(usersfile));
+        char *driversfile = malloc(sizeof(driversfile));
+        char *ridesfile = malloc(sizeof(ridesfile));
         int menu = 1, opcao;
         char opcaoA[1];
 
-         printf("Introduza o caminho para a pasta onde estão os ficheiros de entrada(users, drivers e rides respetivamente):\n");
-         scanf("%s %s %s", usersfile,driversfile, ridesfile);
+        printf("Introduza o caminho para a pasta onde estão os ficheiros de entrada(users, drivers e rides respetivamente):\n");
+        scanf("%s %s %s", usersfile,driversfile, ridesfile);
 
         // char *usersfile = "Dataset_Fase1/users.csv";
         // char *driversfile = "Dataset_Fase1/drivers.csv";
@@ -115,7 +115,14 @@ int main(int argc, char* argv[]){
                 
             }
             else if(opcao == 9){
-                
+                char* data_i = malloc(sizeof(data_i));
+                char* data_f = malloc(sizeof(data_f));
+                printf("\nInsira a Data inicial pretendida(DD/MM/ANO): ");
+                scanf("%s",data_i);
+                printf("\nInsira a Data Final pretendida(DD/MM/ANO): ");
+                scanf("%s",data_f);
+                printQuerie9(catalogos,data_i,data_f);
+                menu = printSubMenu();
             }
             else {
                 printf("\nOpção inválida!\n");
@@ -177,7 +184,7 @@ int main(int argc, char* argv[]){
                                 //query8();
                             }
                             else if(atoi(query) == 9){// então é a 9
-                                //query9();
+                                query9(catalogos,arg1,arg2,i);
                         }
                     }
                     }
@@ -206,9 +213,7 @@ int main(int argc, char* argv[]){
         }
 
         free(catalogos);
-        free(usersfile);
-        free(driversfile);
-        free(ridesfile);
+        fclose(f);
     }
     end = clock();
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
