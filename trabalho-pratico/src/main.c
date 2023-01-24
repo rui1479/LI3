@@ -109,7 +109,14 @@ int main(int argc, char* argv[]){
                 menu = printSubMenu();
             }
             else if(opcao == 7){
-                
+                char* n = malloc(sizeof(n));
+                char* city = malloc(sizeof(city)); 
+                printf("\nInsira a cidade pretendida: ");
+                scanf("%s",city);
+                printf("\nInsira o numero de condutores que deseja listar: ");
+                scanf("%s",n);
+                printQuerie7(catalogos,n,city);
+                menu = printSubMenu();
             }
             else if(opcao == 8){
                 

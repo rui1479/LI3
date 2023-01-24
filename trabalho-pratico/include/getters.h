@@ -9,6 +9,8 @@ typedef struct aux_driver* AUX_DRIVER;
 
 typedef struct aux_user* AUX_USER;
 
+typedef struct aux_q7* AUX_Q7;
+
 typedef struct aux_q9* AUX_Q9;
 
 char* get_name_list_user(Catalogos catalogos, char* username);
@@ -31,6 +33,8 @@ double get_distancia_media_city(Catalogos catalogo, char* city, char* data_inici
 
 GList* auxquerie2 (Catalogos catalogo);
 GList* auxquerie3 (Catalogos catalogo);
+GList* auxquerie7 (Catalogos catalogo,char* city);
+GList* auxquerie8 (Catalogos catalogo,char* gender);
 GList* auxquerie9 (Catalogos catalogo,char* data_inicial, char* data_final);
 
 #endif

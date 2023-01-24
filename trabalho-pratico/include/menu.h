@@ -17,6 +17,7 @@ void printQuerie3(Catalogos catalogo, char* n);
 void printQuerie4(Catalogos catalogo, char* city);
 void printQuerie5(Catalogos catalogo, char* data_inicial, char* data_final);
 void printQuerie6(Catalogos catalogo, char* city, char* data_inicial, char* data_final);
+void printQuerie7(Catalogos catalogo, char* N,char* city);
 void printQuerie9(Catalogos catalogo, char* data_inicial, char* data_final);
 
 #endif
