@@ -119,6 +119,14 @@ int main(int argc, char* argv[]){
                 menu = printSubMenu();
             }
             else if(opcao == 8){
+                // char* gender = malloc(sizeof(gender));
+                // char* anos = malloc(sizeof(anos)); 
+                // printf("\nInsira o género pretendido: ");
+                // scanf("%s",gender);
+                // printf("\nInsira ,pelo menos, o numero á quanto tempo a conta foi criada: ");
+                // scanf("%s",x);
+                // printQuerie8(catalogos,gender, x);
+                // menu = printSubMenu();
                 
             }
             else if(opcao == 9){

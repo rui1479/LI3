@@ -141,10 +141,23 @@ void query7 (Catalogos catalogo, char* N, char* city, int linha){
     GList* sorted = auxquerie7(catalogo, city);
     for (size_t i = 0; i < atoi(N); i++) {
         AUX_Q7 ride = g_list_nth_data(sorted, i);
-        fprintf(query7txt, "%s;%s;%.3f\n", driver->id,driver->nome,(driver->avaliacao)/(driver->contador));
+        fprintf(query7txt, "%s;%s;%.3f\n", rides->id,driver->nome,(driver->avaliacao)/(driver->contador));
     }
     fclose(query7txt);
 }
+
+void query8 (Catalogos catalogo, char* gender, int linha){
+    char buffer[128];
+    sprintf(buffer, "Resultados/command%d_output.txt", linha);
+    FILE *query8txt = fopen(buffer, "w");
+    GList* sorted = auxquerie8(catalogo, gender);
+    for (size_t i = 0; i < atoi(N); i++) {
+        AUX_Q7 ride = g_list_nth_data(sorted, i);
+        fprintf(query8txt, "%s;%s;%s;%s\n", ride->id, driver->nome, ride->username, user->nome_user);
+    }
+    fclose(query8txt);
+}
+
 
 void query9 (Catalogos catalogo, char* data_inicial, char* data_final, int linha){
     char buffer[128];

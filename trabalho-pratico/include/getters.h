@@ -11,6 +11,8 @@ typedef struct aux_user* AUX_USER;
 
 typedef struct aux_q7* AUX_Q7;
 
+typedef struct aux_q8* AUX_Q8;
+
 typedef struct aux_q9* AUX_Q9;
 
 char* get_name_list_user(Catalogos catalogos, char* username);
