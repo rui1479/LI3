@@ -31,9 +31,17 @@ struct data{
     int ano;
 };
 
+struct aux_q7{
+    char *id;
+    char *nome;
+    double avaliacao;
+    int contador;
+};
+
 typedef struct aux_driver* AUX_DRIVER;
 typedef struct aux_user* AUX_USER;
 typedef struct aux_q9* AUX_Q9;
+typedef struct aux_q7* AUX_Q7;
 
 void query1_users(Catalogos catalogo, char *username, int linha){
     char* novousername = strsep(&username,"\n");
@@ -134,17 +142,17 @@ void query6 (Catalogos catalogo, char* city, char* data_inicial, char* data_fina
     fclose(query6txt);
 }
 
-// void query7 (Catalogos catalogo, char* N, char* city, int linha){
-//     char buffer[128];
-//     sprintf(buffer, "Resultados/command%d_output.txt", linha);
-//     FILE *query7txt = fopen(buffer, "w");
-//     GList* sorted = auxquerie7(catalogo, city);
-//     for (size_t i = 0; i < atoi(N); i++) {
-//         AUX_Q7 ride = g_list_nth_data(sorted, i);
-//         fprintf(query7txt, "%s;%s;%.3f\n", rides->id,driver->nome,(driver->avaliacao)/(driver->contador));
-//     }
-//     fclose(query7txt);
-// }
+void query7 (Catalogos catalogo, char* N, char* city, int linha){
+    char buffer[128];
+    sprintf(buffer, "Resultados/command%d_output.txt", linha);
+    FILE *query7txt = fopen(buffer, "w");
+    GList* sorted = auxquerie7(catalogo, city);
+    for (size_t i = 0; i < atoi(N); i++) {
+        AUX_Q7 ride = g_list_nth_data(sorted, i);
+        fprintf(query7txt, "%s;%s;%.3f\n", ride->id,ride->nome,(ride->avaliacao)/(ride->contador));
+    }
+    fclose(query7txt);
+}
 
 // void query8 (Catalogos catalogo, char* gender, int linha){
 //     char buffer[128];

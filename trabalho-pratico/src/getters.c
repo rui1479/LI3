@@ -1,5 +1,5 @@
 #include "../include/getters.h"
-#define ANO "09/10/2022"
+#define ANO "26/01/2023"
 
 //-------------------------------------------------------------------------STRUCTS----------------------------------------------------------------------------------------------------------------
 
@@ -23,8 +23,7 @@ struct aux_q7{
     char *nome;
     double avaliacao;
     int contador;
-    char *city;
-};
+};                      
 
 struct aux_q8{
     char *gender;
@@ -70,7 +69,7 @@ typedef struct data* Data;
 //     else return strcmp(da->id, db->id);
 // }
 
-gint sort_function_driver(gconstpointer a, gconstpointer b) {
+int sort_function_driver(gconstpointer a, gconstpointer b) {
     struct aux_driver *driver1 = (struct aux_driver *)a;
     struct aux_driver *driver2 = (struct aux_driver *)b;
 
@@ -111,24 +110,18 @@ int sort_function_user(gconstpointer a, gconstpointer b){
     return g_strcmp0(user1->username, user2->username);
 }
 
-// int sort_function_q7(gconstpointer a, gconstpointer b){
-//     struct aux_q7 *da = (struct aux_q7 *)a;
-//     struct aux_q7 *db = (struct aux_q7 *)b;
+int sort_function_q7(gconstpointer a, gconstpointer b){
+    struct aux_q7 *q7_a = (struct aux_q7 *) a;
+    struct aux_q7 *q7_b = (struct aux_q7 *) b;
+    double rating_a = q7_a->avaliacao / q7_a->contador;
+    double rating_b = q7_b->avaliacao / q7_b->contador;
+    if (rating_a == rating_b)
+        return g_strcmp0(q7_b->id, q7_a->id);
+    else
+        return (rating_b > rating_a) ? 1 : -1;
+}
 
-//     double avaliacao_a = da->avaliacao / da->contador;
-//     double avaliacao_b = db->avaliacao / db->contador;
-
-//     char *id_a = na->id;
-//     char *id_b = nb->id;
-
-//     if (avaliacao_a < avaliacao_b) return 1;
-//     else if (avaliacao_a > avaliacao_b) return -1;
-//     else if (strcmp(atof(na),atof(nb))==0) return 1;
-//     else if (!strcmp(atof(na),atof(nb))==0) return -1;
-//     else return strcmp(na->id, nb->id);
-// }
-
-gint sort_function_q9(gconstpointer a, gconstpointer b){
+int sort_function_q9(gconstpointer a, gconstpointer b){
     struct aux_q9 *viagem_a = (struct aux_q9 *) a;
     struct aux_q9 *viagem_b = (struct aux_q9 *) b;
 
@@ -589,73 +582,83 @@ GList* auxquerie3 (Catalogos catalogo){
     return sorted;
 }
 
-// GList* auxquerie7 (Catalogos catalogo, char* city){
-//   GHashTable* map = g_hash_table_new(g_str_hash, g_str_equal);
-//   gpointer keyQuery7, valueQuery7;
-//   GHashTableIter iterQuery7;
+GList* auxquerie7 (Catalogos catalogo, char* city){
+  GHashTable* map = g_hash_table_new(g_str_hash, g_str_equal);
+  gpointer keyQuery7, valueQuery7;
+  GHashTableIter iterQuery7;
 
-//   char* novacity = strsep(&city,"\n");
+  char* novacity = strsep(&city,"\n");
 
-//   g_hash_table_iter_init(&iterQuery7,catalogo->Rides);
-//   while(g_hash_table_iter_next(&iterQuery7, &keyQuery7, &valueQuery7)) {
-//       Rides ride = valueQuery7;
-//       if(strcmp(novacity,get_city_Rides(ride)) == 0){
-//         if(!g_hash_table_contains(map,get_driver_Rides(ride))){
-//             AUX_Q7 elem = malloc(sizeof(struct aux_q7));
-//             elem->id = get_driver_Rides(ride);
-//             Driver drivers = g_hash_table_lookup(catalogo->Driver, elem->id);
-//             elem->nome = get_name_driver(drivers);
-//             elem->avaliacao = atof(get_score_driver_Rides(ride));
-//             elem->contador = 1;
-//             elem->id = get_driver_Rides(ride);
-//             g_hash_table_insert(map, elem->id, elem);
-//         }
-//         else {
-//             AUX_Q7 elem = g_hash_table_lookup(map,get_driver_Rides(ride));
-//             elem->avaliacao = elem->avaliacao + atof(get_score_driver_Rides(ride));
-//             elem->contador++;
-//             g_hash_table_insert(map, elem->id, elem);
-//         }
-//       }
-//     }
+  g_hash_table_iter_init(&iterQuery7,catalogo->Rides);
+  while(g_hash_table_iter_next(&iterQuery7, &keyQuery7, &valueQuery7)) {
+      Rides ride = valueQuery7;
+      if(strcmp(novacity,get_city_Rides(ride)) == 0){
+        if(!g_hash_table_contains(map,get_driver_Rides(ride))){
+            AUX_Q7 elem = malloc(sizeof(struct aux_q7));
+            elem->id = get_driver_Rides(ride);
+            Driver drivers = g_hash_table_lookup(catalogo->Driver, elem->id);
+            elem->nome = get_name_driver(drivers);
+            elem->avaliacao = atof(get_score_driver_Rides(ride));
+            elem->contador = 1;
+            elem->id = get_driver_Rides(ride);
+            g_hash_table_insert(map, elem->id, elem);
+        }
+        else {
+            AUX_Q7 elem = g_hash_table_lookup(map,get_driver_Rides(ride));
+            elem->avaliacao = elem->avaliacao + atof(get_score_driver_Rides(ride));
+            elem->contador++;
+            g_hash_table_insert(map, elem->id, elem);
+        }
+      }
+    }
     
-//     GList* list = g_hash_table_get_values(map);
-//     GList* sorted = g_list_sort(list, sort_function_q7); (Não esquecer de mudar o return e a função de sort)
+    GList* list = g_hash_table_get_values(map);
+    GList* sorted = g_list_sort (list, sort_function_q7); //(Não esquecer de mudar o return e a função de sort)
 
-//     g_list_free(list);
-//     g_hash_table_destroy(map);
+    // g_list_free(list);
+    // g_hash_table_destroy(map);
 
-//     return list;
-// }
+    return sorted;
+}
 
-//  GList* auxquerie8 (Catalogos catalogo,char* gender){
-//     GHashTable* map = g_hash_table_new(g_str_hash, g_str_equal);
-//     gpointer keyQuery8, valueQuery8;
-//     GHashTableIter iterQuery8;
+GList* auxquerie8 (Catalogos catalogo,char* gender, int x){
+    GHashTable* map = g_hash_table_new(g_str_hash, g_str_equal);
+    gpointer keyQuery8, valueQuery8;
+    GHashTableIter iterQuery8;
 
-//     char* novogender = strsep(&gender,"\n");
+    Data atual = build_data(g_strdup(ANO));
+    int ano_ref = get_ano(atual) - x;
+    int mes_ref = get_mes(atual);
+    int dia_ref = get_dia(atual);
 
-//     g_hash_table_iter_init(&iterQuery8,catalogo->Rides);
-//     while(g_hash_table_iter_next(&iterQuery8, &keyQuery8, &valueQuery8)) {
-//         Rides ride = valueQuery8;
-      
-//         AUX_Q8 elem = malloc(sizeof(struct aux_q8)); 
-//         elem->id = get_driver_Rides(ride);
-//         Driver drivers = g_hash_table_lookup(catalogo->Driver, elem->id);
-//         elem->username = get_user_Rides(ride);
-//         User user = g_hash_table_lookup(catalogo->user, elem->username);
-//         if(strcmp(get_gender_driver(drivers),get_gender_user(user))==0 && strcmp(novogender,get_gender_driver(drivers)) == 0 ){
-//           elem->nome = get_name_driver(drivers);
-//           elem->nome_user = get_name_user(user);
-//           g_hash_table_insert(map, elem->id, elem);
-//         }
-//       }
+    char* novogender = strsep(&gender,"\n");
+
+    g_hash_table_iter_init(&iterQuery8,catalogo->Rides);
+    while(g_hash_table_iter_next(&iterQuery8, &keyQuery8, &valueQuery8)) {
+         Rides ride = valueQuery8;
+         Data data_a_comparar = build_data(get_date_Rides(ride));
+         int ano_ride = get_ano(data_a_comparar);
+         int mes_ride = get_mes(data_a_comparar);
+         int dia_ride = get_dia(data_a_comparar);
+         if(ano_ref > ano_ride || ano_ref == ano_ride && mes_ref > mes_ride || ano_ref == ano_ride && mes_ref == mes_ride && dia_ref > dia_ride || ano_ref == ano_ride && mes_ref == mes_ride && dia_ref == dia_ride){
+          AUX_Q8 elem = malloc(sizeof(struct aux_q8)); 
+          elem->id = get_driver_Rides(ride);
+          Driver drivers = g_hash_table_lookup(catalogo->Driver, elem->id);
+          elem->username = get_user_Rides(ride);
+          User user = g_hash_table_lookup(catalogo->user, elem->username);
+          if(strcmp(get_gender_driver(drivers),get_gender_user(user))==0 && strcmp(novogender,get_gender_driver(drivers)) == 0 ){
+            elem->nome = get_name_driver(drivers);
+            elem->nome_user = get_name_user(user);
+            g_hash_table_insert(map, elem->id, elem);
+            }
+        }
+      }
     
-//     GList* list = g_hash_table_get_values(map);
-//     GList* sorted = g_list_sort(list, sort_function_q9);
+    GList* list = g_hash_table_get_values(map);
+    GList* sorted = g_list_sort(list, sort_function_q9);
 
-//     return sorted;
-// }
+    return sorted;
+}
 
 
  GList* auxquerie9 (Catalogos catalogo,char* data_inicial, char* data_final){

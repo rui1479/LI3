@@ -109,14 +109,14 @@ int main(int argc, char* argv[]){
                 menu = printSubMenu();
             }
             else if(opcao == 7){
-                // char* n = malloc(sizeof(n));
-                // char* city = malloc(sizeof(city)); 
-                // printf("\nInsira a cidade pretendida: ");
-                // scanf("%s",city);
-                // printf("\nInsira o numero de condutores que deseja listar: ");
-                // scanf("%s",n);
-                // printQuerie7(catalogos,n,city);
-                // menu = printSubMenu();
+                char* n = malloc(sizeof(n));
+                char* city = malloc(sizeof(city)); 
+                printf("\nInsira a cidade pretendida: ");
+                scanf("%s",city);
+                printf("\nInsira o numero de condutores que deseja listar: ");
+                scanf("%s",n);
+                printQuerie7(catalogos,n,city);
+                menu = printSubMenu();
             }
             else if(opcao == 8){
                 // char* gender = malloc(sizeof(gender));
@@ -193,7 +193,7 @@ int main(int argc, char* argv[]){
                                 query5(catalogos,arg1,arg2,i);
                             }
                             else if(atoi(query) == 7){// então é a 7
-                                //query7();
+                                query7(catalogos,arg1,arg2,i);
                             }
                             else if(atoi(query) == 8){// então é a 8
                                 //query8();
