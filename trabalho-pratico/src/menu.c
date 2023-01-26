@@ -164,27 +164,27 @@ void printQuerie6(Catalogos catalogo, char* city, char* data_inicial, char* data
     printf("-----------------------------------------------------------------------------------------------------\n");
 }
 
-void printQuerie7(Catalogos catalogo, char* n, char* city){
-    GList* sorted = auxquerie7(catalogo, city);
-    printf("\n--------------------------------------- QUERY 7 -----------------------------------------------\n");
-    for (size_t i = 0; i < atoi(n); i++) {
-        AUX_Q7 driver = g_list_nth_data(sorted, i);
-        printf("%s;%s;%.3f\n", rides->id,driver->nome,(driver->avaliacao)/(driver->contador));
-    }
-    printf("-----------------------------------------------------------------------------------------------------\n");
+// void printQuerie7(Catalogos catalogo, char* n, char* city){
+//     GList* sorted = auxquerie7(catalogo, city);
+//     printf("\n--------------------------------------- QUERY 7 -----------------------------------------------\n");
+//     for (size_t i = 0; i < atoi(n); i++) {
+//         AUX_Q7 driver = g_list_nth_data(sorted, i);
+//         printf("%s;%s;%.3f\n", rides->id,driver->nome,(driver->avaliacao)/(driver->contador));
+//     }
+//     printf("-----------------------------------------------------------------------------------------------------\n");
 
-}
+// }
 
-void printQuerie8(Catalogos catalogo, char* gender, char* x){
-    GList* sorted = auxquerie8(catalogo, gender);
-    printf("\n--------------------------------------- QUERY 8 -----------------------------------------------\n");
-    int tamanho = g_list_length(sorted);
-    for (size_t i = 0; i < tamanho; i++) {
-        AUX_Q9 ride = g_list_nth_data(sorted, i);
-        printf( "%s;%s;%s;%s\n", ride->id, driver->nome, ride->username, user->nome_user);
-    }
-    printf("-----------------------------------------------------------------------------------------------------\n");
-}
+// void printQuerie8(Catalogos catalogo, char* gender, char* x){
+//     GList* sorted = auxquerie8(catalogo, gender);
+//     printf("\n--------------------------------------- QUERY 8 -----------------------------------------------\n");
+//     int tamanho = g_list_length(sorted);
+//     for (size_t i = 0; i < tamanho; i++) {
+//         AUX_Q9 ride = g_list_nth_data(sorted, i);
+//         printf( "%s;%s;%s;%s\n", ride->id, driver->nome, ride->username, user->nome_user);
+//     }
+//     printf("-----------------------------------------------------------------------------------------------------\n");
+// }
 
 void printQuerie9(Catalogos catalogo, char* data_inicial, char* data_final){
     GList* sorted = auxquerie9(catalogo,data_inicial,data_final);

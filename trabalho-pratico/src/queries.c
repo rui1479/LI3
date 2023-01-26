@@ -134,29 +134,29 @@ void query6 (Catalogos catalogo, char* city, char* data_inicial, char* data_fina
     fclose(query6txt);
 }
 
-void query7 (Catalogos catalogo, char* N, char* city, int linha){
-    char buffer[128];
-    sprintf(buffer, "Resultados/command%d_output.txt", linha);
-    FILE *query7txt = fopen(buffer, "w");
-    GList* sorted = auxquerie7(catalogo, city);
-    for (size_t i = 0; i < atoi(N); i++) {
-        AUX_Q7 ride = g_list_nth_data(sorted, i);
-        fprintf(query7txt, "%s;%s;%.3f\n", rides->id,driver->nome,(driver->avaliacao)/(driver->contador));
-    }
-    fclose(query7txt);
-}
+// void query7 (Catalogos catalogo, char* N, char* city, int linha){
+//     char buffer[128];
+//     sprintf(buffer, "Resultados/command%d_output.txt", linha);
+//     FILE *query7txt = fopen(buffer, "w");
+//     GList* sorted = auxquerie7(catalogo, city);
+//     for (size_t i = 0; i < atoi(N); i++) {
+//         AUX_Q7 ride = g_list_nth_data(sorted, i);
+//         fprintf(query7txt, "%s;%s;%.3f\n", rides->id,driver->nome,(driver->avaliacao)/(driver->contador));
+//     }
+//     fclose(query7txt);
+// }
 
-void query8 (Catalogos catalogo, char* gender, int linha){
-    char buffer[128];
-    sprintf(buffer, "Resultados/command%d_output.txt", linha);
-    FILE *query8txt = fopen(buffer, "w");
-    GList* sorted = auxquerie8(catalogo, gender);
-    for (size_t i = 0; i < atoi(N); i++) {
-        AUX_Q7 ride = g_list_nth_data(sorted, i);
-        fprintf(query8txt, "%s;%s;%s;%s\n", ride->id, driver->nome, ride->username, user->nome_user);
-    }
-    fclose(query8txt);
-}
+// void query8 (Catalogos catalogo, char* gender, int linha){
+//     char buffer[128];
+//     sprintf(buffer, "Resultados/command%d_output.txt", linha);
+//     FILE *query8txt = fopen(buffer, "w");
+//     GList* sorted = auxquerie8(catalogo, gender);
+//     for (size_t i = 0; i < atoi(N); i++) {
+//         AUX_Q7 ride = g_list_nth_data(sorted, i);
+//         fprintf(query8txt, "%s;%s;%s;%s\n", ride->id, driver->nome, ride->username, user->nome_user);
+//     }
+//     fclose(query8txt);
+// }
 
 
 void query9 (Catalogos catalogo, char* data_inicial, char* data_final, int linha){
@@ -167,6 +167,6 @@ void query9 (Catalogos catalogo, char* data_inicial, char* data_final, int linha
     int tamanho = g_list_length(sorted);
     for (size_t i = 0; i < tamanho; i++) {
         AUX_Q9 ride = g_list_nth_data(sorted, i);
-        fprintf(query9txt, "%s;%i/%i/%i;%s;%s,%s\n", ride->id, ride->data_viagem->dia, ride->data_viagem->mes, ride->data_viagem->ano, ride->distancia, ride->cidade,ride->tip);
+        fprintf(query9txt, "%s;%i/%i/%i;%s;%s,%.3f\n", ride->id, ride->data_viagem->dia, ride->data_viagem->mes, ride->data_viagem->ano, ride->distancia, ride->cidade,atof((ride->tip)));
     }
 }
