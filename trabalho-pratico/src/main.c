@@ -15,14 +15,26 @@ int main(int argc, char* argv[]){
 
     if(argc==1){
 
-        char *usersfile = malloc(sizeof(usersfile));
-        char *driversfile = malloc(sizeof(driversfile));
-        char *ridesfile = malloc(sizeof(ridesfile));
+        char* caminho = malloc(1000);
         int menu = 1, opcao;
         char opcaoA[1];
 
-        printf("Introduza o caminho para a pasta onde estão os ficheiros de entrada(users, drivers e rides respetivamente):\n");
-        scanf("%s %s %s", usersfile,driversfile, ridesfile);
+        printf("Introduza o caminho para a pasta onde estão os ficheiros de entrada:\n");
+        scanf("%s", caminho);
+        
+        char *usersfile = malloc(strlen("users.csv")+1000);
+            strcpy(usersfile,caminho);
+            strcat(usersfile,"/users.csv");
+
+        char *driversfile= malloc(strlen("drivers.csv")+1000);
+            strcpy(driversfile,caminho);
+            strcat(driversfile,"/drivers.csv");
+
+        char *ridesfile = malloc(strlen("rides.csv")+1000);
+            strcpy(ridesfile,caminho);
+            strcat(ridesfile,"/rides.csv");
+
+        free(caminho);     
 
         // char *usersfile = "Dataset_Fase1/users.csv";
         // char *driversfile = "Dataset_Fase1/drivers.csv";
