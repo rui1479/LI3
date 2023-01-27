@@ -31,6 +31,9 @@ struct aux_q8{
     char *nome;
     char *username;
     char *nome_user;
+    char *viagem;
+    Data conta_driver;
+    Data conta_user;
 };
 
 struct aux_q9{
@@ -119,6 +122,37 @@ int sort_function_q7(gconstpointer a, gconstpointer b){
         return g_strcmp0(q7_b->id, q7_a->id);
     else
         return (rating_b > rating_a) ? 1 : -1;
+}
+
+int sort_function_q8(gconstpointer a, gconstpointer b){
+    struct aux_q8 *q8_a = (struct aux_q8 *) a;
+    struct aux_q8 *q8_b = (struct aux_q8 *) b;
+
+    if (q8_a->conta_driver->ano == q8_b->conta_driver->ano){
+        if (q8_a->conta_driver->mes == q8_b->conta_driver->mes){
+            if (q8_a->conta_driver->dia == q8_b->conta_driver->dia){ 
+                if (q8_a->conta_user->ano == q8_b->conta_user->ano){
+                    if (q8_a->conta_user->mes == q8_b->conta_user->mes){
+                       if (q8_a->conta_user->dia == q8_b->conta_user->dia){
+                        return g_strcmp0(q8_a->viagem, q8_b->viagem);
+                       }
+                        else
+                            return q8_a->conta_user->dia - q8_b->conta_user->dia; 
+                    }
+                     else
+                        return q8_a->conta_user->mes - q8_b->conta_user->mes;
+                }
+                 else
+                    return q8_a->conta_user->ano - q8_b->conta_user->ano;
+            }        
+             else
+                return q8_a->conta_driver->dia - q8_b->conta_driver->dia; 
+        }
+         else
+             return q8_a->conta_driver->mes - q8_b->conta_driver->mes;
+    }
+    else
+        return q8_a->conta_driver->ano - q8_b->conta_driver->ano; 
 }
 
 int sort_function_q9(gconstpointer a, gconstpointer b){
@@ -627,7 +661,7 @@ GList* auxquerie8 (Catalogos catalogo,char* gender, int x){
     GHashTableIter iterQuery8;
 
     Data atual = build_data(g_strdup(ANO));
-    int ano_ref = get_ano(atual) - x;
+    int ano_ref = (get_ano(atual) - x);
     int mes_ref = get_mes(atual);
     int dia_ref = get_dia(atual);
 
@@ -650,12 +684,15 @@ GList* auxquerie8 (Catalogos catalogo,char* gender, int x){
             elem->nome = get_name_driver(drivers);
             elem->nome_user = get_name_user(user);
             g_hash_table_insert(map, elem->id, elem);
+            elem->conta_driver=build_data(get_account_creation_driver(drivers));
+            elem->conta_user = build_data(get_account_creation_user(user));
+            elem->viagem=get_id_Rides(ride);
             }
         }
       }
     
     GList* list = g_hash_table_get_values(map);
-    GList* sorted = g_list_sort(list, sort_function_q9);
+    GList* sorted = g_list_sort(list, sort_function_q8);
 
     return sorted;
 }

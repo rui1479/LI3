@@ -30,6 +30,17 @@ struct aux_q7{
     int contador;
 };    
 
+struct aux_q8{
+    char *gender;
+    char *id;
+    char *nome;
+    char *username;
+    char *nome_user;
+    char *viagem;
+    Data conta_driver;
+    Data conta_user;
+};
+
 struct data{
     int dia;
     int mes;
@@ -182,16 +193,16 @@ void printQuerie7(Catalogos catalogo, char* n, char* city){
 
 }
 
-// void printQuerie8(Catalogos catalogo, char* gender, char* x){
-//     GList* sorted = auxquerie8(catalogo, gender);
-//     printf("\n--------------------------------------- QUERY 8 -----------------------------------------------\n");
-//     int tamanho = g_list_length(sorted);
-//     for (size_t i = 0; i < tamanho; i++) {
-//         AUX_Q9 ride = g_list_nth_data(sorted, i);
-//         printf( "%s;%s;%s;%s\n", ride->id, driver->nome, ride->username, user->nome_user);
-//     }
-//     printf("-----------------------------------------------------------------------------------------------------\n");
-// }
+void printQuerie8(Catalogos catalogo, char* gender, int x){
+    GList* sorted = auxquerie8(catalogo, gender, x);
+    printf("\n--------------------------------------- QUERY 8 -----------------------------------------------\n");
+    int tamanho = g_list_length(sorted);
+    for (size_t i = 0; i < tamanho; i++) {
+        AUX_Q8 ride = g_list_nth_data(sorted, i);
+        printf( "%s;%s;%s;%s\n", ride->id, ride->nome, ride->username, ride->nome_user);
+    }
+    printf("-----------------------------------------------------------------------------------------------------\n");
+}
 
 void printQuerie9(Catalogos catalogo, char* data_inicial, char* data_final){
     GList* sorted = auxquerie9(catalogo,data_inicial,data_final);
