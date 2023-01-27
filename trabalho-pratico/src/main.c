@@ -19,26 +19,26 @@ int main(int argc, char* argv[]){
         int menu = 1, opcao;
         char opcaoA[1];
 
-        printf("Introduza o caminho para a pasta onde estão os ficheiros de entrada:\n");
-        scanf("%s", caminho);
+        // printf("Introduza o caminho para a pasta onde estão os ficheiros de entrada:\n");
+        // scanf("%s", caminho);
         
-        char *usersfile = malloc(strlen("users.csv")+1000);
-            strcpy(usersfile,caminho);
-            strcat(usersfile,"/users.csv");
+        // char *usersfile = malloc(strlen("users.csv")+1000);
+        //     strcpy(usersfile,caminho);
+        //     strcat(usersfile,"/users.csv");
 
-        char *driversfile= malloc(strlen("drivers.csv")+1000);
-            strcpy(driversfile,caminho);
-            strcat(driversfile,"/drivers.csv");
+        // char *driversfile= malloc(strlen("drivers.csv")+1000);
+        //     strcpy(driversfile,caminho);
+        //     strcat(driversfile,"/drivers.csv");
 
-        char *ridesfile = malloc(strlen("rides.csv")+1000);
-            strcpy(ridesfile,caminho);
-            strcat(ridesfile,"/rides.csv");
+        // char *ridesfile = malloc(strlen("rides.csv")+1000);
+        //     strcpy(ridesfile,caminho);
+        //     strcat(ridesfile,"/rides.csv");
 
         free(caminho);     
 
-        // char *usersfile = "Dataset_Fase1/users.csv";
-        // char *driversfile = "Dataset_Fase1/drivers.csv";
-        // char *ridesfile = "Dataset_Fase1/rides.csv";
+        char *usersfile = "Dataset_Fase1/users.csv";
+        char *driversfile = "Dataset_Fase1/drivers.csv";
+        char *ridesfile = "Dataset_Fase1/rides.csv";
 
         FILE* fileUser = fopen(usersfile,"r");
         FILE* fileDriver = fopen(driversfile,"r");
@@ -131,14 +131,14 @@ int main(int argc, char* argv[]){
                 menu = printSubMenu();
             }
             else if(opcao == 8){
-                char* gender = malloc(sizeof(gender));
-                char* x = malloc(sizeof(x)); 
-                printf("\nInsira o género pretendido: ");
-                scanf("%s",gender);
-                printf("\nInsira ,pelo menos, o numero á quanto tempo a conta foi criada: ");
-                scanf("%s",x);
-                printQuerie8(catalogos,gender, x);
-                menu = printSubMenu();
+                // char* gender = malloc(sizeof(gender));
+                // char* anos = malloc(sizeof(anos)); 
+                // printf("\nInsira o género pretendido: ");
+                // scanf("%s",gender);
+                // printf("\nInsira ,pelo menos, o numero á quanto tempo a conta foi criada: ");
+                // scanf("%s",x);
+                // printQuerie8(catalogos,gender, x);
+                // menu = printSubMenu();
                 
             }
             else if(opcao == 9){

@@ -16,6 +16,8 @@ char* get_city_driver (Driver a);
 char* get_account_creation_driver (Driver a);
 char* get_account_status_driver (Driver a);
 
+void free_driver(struct driver* d);
+
 Driver build_Driver(char *line);
 
 #endif

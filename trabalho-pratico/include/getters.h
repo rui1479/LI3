@@ -2,6 +2,7 @@
 #define GETTERS_H
 
 #include "../include/catalogos.h"
+#include "../include/data.h"
 #include <string.h>
 #include <time.h>
 
@@ -14,6 +15,21 @@ typedef struct aux_q7* AUX_Q7;
 typedef struct aux_q8* AUX_Q8;
 
 typedef struct aux_q9* AUX_Q9;
+
+char* get_id_auxdriver (AUX_DRIVER a);
+char* get_nome_auxdriver (AUX_DRIVER a);
+double get_avaliacao_auxdriver (AUX_DRIVER a);
+int get_contador_auxdriver (AUX_DRIVER a);
+
+char* get_user_auxuser (AUX_USER a);
+char* get_nome_auxuser (AUX_USER a);
+int get_distancia_auxuser (AUX_USER a);
+
+char* get_id_auxq9 (AUX_Q9 a);
+char* get_distancia_auxq9 (AUX_Q9 a);
+char* get_cidade_auxq9 (AUX_Q9 a);
+char* get_tip_auxq9 (AUX_Q9 a);
+Data get_data_auxq9 (AUX_Q9 a);
 
 char* get_name_list_user(Catalogos catalogos, char* username);
 char* get_gender_list_user(Catalogos catalogos, char* username);
@@ -32,11 +48,13 @@ double get_total_euferido(Catalogos catalogos, char *id);
 double get_preco_medio_city(Catalogos catalogos, char *city);
 double get_preco_medio_data(Catalogos catalogo, char* data_inicial, char* data_final);
 double get_distancia_media_city(Catalogos catalogo, char* city, char* data_inicial, char* data_final);
+double get_preco_medio_data_test(Catalogos catalogo, Data inicial, Data final);
+double get_distancia_media_city_test(Catalogos catalogo, char* city, Data inicial, Data final);
 
 GList* auxquerie2 (Catalogos catalogo);
 GList* auxquerie3 (Catalogos catalogo);
 GList* auxquerie7 (Catalogos catalogo,char* city);
-GList* auxquerie8 (Catalogos catalogo,char* gender, int x);
+// GList* auxquerie8 (Catalogos catalogo,char* gender);
 GList* auxquerie9 (Catalogos catalogo,char* data_inicial, char* data_final);
 
 #endif

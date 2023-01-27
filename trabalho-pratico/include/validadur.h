@@ -15,4 +15,6 @@ int testdriver (Driver a);
 int testuser (User a);
 int testrides (Rides a);
 
+int compareFiles(FILE *file1, FILE *file2);
+
 #endif

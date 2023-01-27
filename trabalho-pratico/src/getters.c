@@ -36,6 +36,7 @@ struct aux_q8{
     Data conta_user;
 };
 
+
 struct aux_q9{
     char *id;
     Data data_viagem;
@@ -44,33 +45,92 @@ struct aux_q9{
     char *tip;
 };
 
-struct data{
-    int dia;
-    int mes;
-    int ano;
-};
-
-typedef struct data* Data;
-
 //-------------------------------------------------------------------------FUNÇÕES AUXILIARES----------------------------------------------------------------------------------------------------------------
 
+char* get_id_auxdriver (AUX_DRIVER a){
+    if (a){
+        return g_strdup(a->id);
+    }
+    return NULL;
+}
 
-// int sort_function_driver(gconstpointer a, gconstpointer b){
-//     struct aux_driver *da = (struct aux_driver *)a;
-//     struct aux_driver *db = (struct aux_driver *)b;
+char* get_nome_auxdriver (AUX_DRIVER a){
+    if (a){
+        return g_strdup(a->nome);
+    }
+    return NULL;
+}
 
-//     double avaliacao_a = da->avaliacao / da->contador;
-//     double avaliacao_b = db->avaliacao / db->contador;
+double get_avaliacao_auxdriver (AUX_DRIVER a){
+    if (a){
+        return a->avaliacao;
+    }
+    return 0;
+}
 
-//     Data data_a = da->viagem_recente;
-//     Data data_b = db->viagem_recente;
+int get_contador_auxdriver (AUX_DRIVER a){
+    if (a){
+        return a->contador;
+    }
+    return 0;
+}
 
-//     if (avaliacao_a < avaliacao_b) return 1;
-//     else if (avaliacao_a > avaliacao_b) return -1;
-//     else if (compara_datas(data_a,data_b)) return 1;
-//     else if (!compara_datas(data_a,data_b)) return -1;
-//     else return strcmp(da->id, db->id);
-// }
+char* get_user_auxuser (AUX_USER a){
+    if (a){
+        return g_strdup(a->username);
+    }
+    return NULL;
+}
+
+char* get_nome_auxuser (AUX_USER a){
+    if (a){
+        return g_strdup(a->nome);
+    }
+    return NULL;
+}
+
+int get_distancia_auxuser (AUX_USER a){
+    if (a){
+        return a->distotal;
+    }
+    return 0;
+}
+
+char* get_id_auxq9 (AUX_Q9 a){
+    if (a){
+        return g_strdup(a->id);
+    }
+    return NULL;
+}
+
+char* get_distancia_auxq9 (AUX_Q9 a){
+    if (a){
+        return g_strdup(a->distancia);
+    }
+    return NULL;
+}
+
+char* get_cidade_auxq9 (AUX_Q9 a){
+    if (a){
+        return g_strdup(a->cidade);
+    }
+    return NULL;
+}
+
+char* get_tip_auxq9 (AUX_Q9 a){
+    if (a){
+        return g_strdup(a->tip);
+    }
+    return NULL;
+}
+
+Data get_data_auxq9 (AUX_Q9 a){
+    if (a){
+        return (a->data_viagem);
+    }
+    return NULL;
+}
+
 
 int sort_function_driver(gconstpointer a, gconstpointer b) {
     struct aux_driver *driver1 = (struct aux_driver *)a;
@@ -79,36 +139,42 @@ int sort_function_driver(gconstpointer a, gconstpointer b) {
     double avaliacao1 = driver1->avaliacao / driver1->contador;
     double avaliacao2 = driver2->avaliacao / driver2->contador;
 
-    if (avaliacao1 != avaliacao2)
+    Data d1 = driver1->viagem_recente;
+    Data d2 = driver2->viagem_recente;
+
+     if (avaliacao1 != avaliacao2)
         return (avaliacao2 > avaliacao1) ? 1 : -1;
 
-    if (driver1->viagem_recente->ano != driver2->viagem_recente->ano)
-        return driver2->viagem_recente->ano - driver1->viagem_recente->ano;
+    if (get_ano(d1) != get_ano(d2))
+        return get_ano(d2) - get_ano(d1);
 
-    if (driver1->viagem_recente->mes != driver2->viagem_recente->mes)
-        return driver2->viagem_recente->mes - driver1->viagem_recente->mes;
+    if (get_mes(d1) != get_mes(d2))
+        return get_mes(d2) - get_mes(d1);
 
-    if (driver1->viagem_recente->dia != driver2->viagem_recente->dia)
-        return driver2->viagem_recente->dia - driver1->viagem_recente->dia;
+    if (get_dia(d1) != get_dia(d2))
+        return get_dia(d2) - get_dia(d1);
 
     return strcmp(driver1->id, driver2->id);
-}
+ }
 
 int sort_function_user(gconstpointer a, gconstpointer b){
     struct aux_user *user1 = (struct aux_user *)a;
     struct aux_user *user2 = (struct aux_user *)b;
 
+    Data u1 = user1->viagem_recente;
+    Data u2 = user2->viagem_recente;
+
     if (user1->distotal != user2->distotal)
         return user2->distotal - user1->distotal;
 
-    if (user1->viagem_recente->ano != user2->viagem_recente->ano)
-        return user2->viagem_recente->ano - user1->viagem_recente->ano;
+    if (get_ano(u1) != get_ano(u2))
+        return get_ano(u2) - get_ano(u1);
 
-    if (user1->viagem_recente->mes != user2->viagem_recente->mes)
-        return user2->viagem_recente->mes - user1->viagem_recente->mes;
+    if (get_mes(u1) != get_ano(u2))
+        return get_ano(u2) - get_ano(u1);
 
-    if (user1->viagem_recente->dia != user2->viagem_recente->dia)
-        return user2->viagem_recente->dia - user1->viagem_recente->dia;
+    if (get_dia(u1) != get_dia(u2))
+        return get_dia(u2) - get_dia(u1);
 
     return g_strcmp0(user1->username, user2->username);
 }
@@ -162,19 +228,22 @@ int sort_function_q9(gconstpointer a, gconstpointer b){
     int dist_a = atoi(viagem_a->distancia);
     int dist_b = atoi(viagem_b->distancia);
 
+    Data v1 = viagem_a->data_viagem;
+    Data v2 = viagem_b->data_viagem;
+
     if (dist_a == dist_b){
-        if (viagem_a->data_viagem->ano == viagem_b->data_viagem->ano){
-            if (viagem_a->data_viagem->mes == viagem_b->data_viagem->mes){
-                if (viagem_a->data_viagem->dia == viagem_b->data_viagem->dia)
+        if (get_ano(v1) == get_ano(v2)){
+            if (get_mes(v1) == get_mes(v2)){
+                if (get_dia(v1) == get_dia(v2))
                     return g_strcmp0(viagem_b->id, viagem_a->id);
                 else
-                    return viagem_b->data_viagem->dia - viagem_a->data_viagem->dia;
+                    return get_dia(v2) - get_dia(v1);
             }
             else
-                return viagem_b->data_viagem->mes - viagem_a->data_viagem->mes;
+                return get_mes(v2) - get_mes(v1);
         }
         else
-            return viagem_b->data_viagem->ano - viagem_a->data_viagem->ano;
+            return get_ano(v2) - get_ano(v1);
     }
     else
         return dist_b - dist_a;
@@ -465,8 +534,11 @@ double get_preco_medio_city(Catalogos catalogos, char *city){
 
 double get_preco_medio_data(Catalogos catalogo, char* data_inicial, char* data_final){
 
-  Data inicial = build_data(data_inicial);
-  Data final = build_data(data_final);
+  char* novadatai = strsep(&data_inicial,"\n");
+  char* novadataf = strsep(&data_final,"\n");
+
+  Data inicial = build_data(novadatai);
+  Data final = build_data(novadataf);
 
 
   int contador = 0;
@@ -530,8 +602,7 @@ double get_distancia_media_city(Catalogos catalogo, char* city, char* data_inici
       contador++;
      }
   }
-  printf("%i\n",km);
-  printf("%i",contador);
+
   total = (double)km / contador;
 
   return total;
@@ -683,16 +754,16 @@ GList* auxquerie8 (Catalogos catalogo,char* gender, int x){
           if(strcmp(get_gender_driver(drivers),get_gender_user(user))==0 && strcmp(novogender,get_gender_driver(drivers)) == 0 ){
             elem->nome = get_name_driver(drivers);
             elem->nome_user = get_name_user(user);
-            g_hash_table_insert(map, elem->id, elem);
             elem->conta_driver=build_data(get_account_creation_driver(drivers));
             elem->conta_user = build_data(get_account_creation_user(user));
             elem->viagem=get_id_Rides(ride);
+            g_hash_table_insert(map, elem->id, elem);
             }
         }
       }
     
     GList* list = g_hash_table_get_values(map);
-    GList* sorted = g_list_sort(list, sort_function_q8);
+    GList* sorted = g_list_sort(list, sort_function_q9);
 
     return sorted;
 }
@@ -725,3 +796,4 @@ GList* auxquerie8 (Catalogos catalogo,char* gender, int x){
 
     return sorted;
 }
+

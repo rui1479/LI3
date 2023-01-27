@@ -79,6 +79,19 @@ char* get_comment_Rides(Rides r) {
   return NULL;
 }
 
+void free_rides(Rides r) {
+    free(r->id);
+    free(r->date);
+    free(r->driver);
+    free(r->user);
+    free(r->city);
+    free(r->distance);
+    free(r->score_user);
+    free(r->score_driver);
+    free(r->tip);
+    free(r->comment);
+    free(r);
+}
 
 Rides build_Rides(char *line) {
 

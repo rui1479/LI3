@@ -154,3 +154,23 @@ int testrides (Rides a){
             campos_positivos(get_city_Rides(a)) && testa_distance(get_distance_Rides(a)) &&
             testa_score(get_score_user_Rides(a)) && testa_score(get_score_driver_Rides(a)));
 }
+
+//Esta função compara dois arquivos de texto, caractere por caractere, e retorna 1 se eles são idênticos e 0 se houver diferenças.
+int compareFiles(FILE *file1, FILE *file2){
+    char ch1 = getc(file1);
+    char ch2 = getc(file2);
+    int error = 0, pos = 0, line = 1;
+    while (ch1 != EOF && ch2 != EOF){
+        pos++;
+        if (ch1 == '\n' && ch2 == '\n'){
+            line++;
+            pos = 0;
+        }
+        if (ch1 != ch2){
+            return 0;
+        }
+        ch1 = getc(file1);
+        ch2 = getc(file2);
+    }
+    return 1;
+}

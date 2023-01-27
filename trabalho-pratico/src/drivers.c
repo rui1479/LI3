@@ -79,6 +79,19 @@ char* get_account_status_driver (Driver a){
     return NULL;
 }
 
+void free_driver(struct driver* d) {
+    free(d->id);
+    free(d->name);
+    free(d->birth);
+    free(d->gender);
+    free(d->car_class);
+    free(d->license_plate);
+    free(d->city);
+    free(d->account_creation);
+    free(d->account_status);
+    free(d);
+}
+
 Driver build_Driver(char *line){
 
         Driver a = malloc(sizeof(struct driver));

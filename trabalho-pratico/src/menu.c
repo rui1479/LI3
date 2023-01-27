@@ -1,34 +1,11 @@
 #include "../include/menu.h"
 
-struct aux_driver{
-    char *id;
-    char* nome;
-    double avaliacao;
-    int contador;
-    Data viagem_recente;
-};
-
-struct aux_user{
-    char *username;
-    char *nome;
-    int distotal;
-    Data viagem_recente;
-};
-
-struct aux_q9{
-    char *id;
-    Data data_viagem;
-    char *distancia;
-    char *cidade;
-    char *tip;
-};
-
 struct aux_q7{
     char *id;
     char *nome;
     double avaliacao;
     int contador;
-};    
+};
 
 struct aux_q8{
     char *gender;
@@ -39,12 +16,6 @@ struct aux_q8{
     char *viagem;
     Data conta_driver;
     Data conta_user;
-};
-
-struct data{
-    int dia;
-    int mes;
-    int ano;
 };
 
 void printMenuPrincipal(){
@@ -146,7 +117,7 @@ void printQuerie2(Catalogos catalogo, char* n){
     printf("\n--------------------------------------- QUERY 2 -----------------------------------------------\n");
     for (size_t i = 0; i < atoi(n); i++) {
         AUX_DRIVER driver = g_list_nth_data(sorted, i);
-        printf("%s;%s;%.3f\n", driver->id,driver->nome,(driver->avaliacao)/(driver->contador));
+        printf("%s;%s;%.3f\n", get_id_auxdriver(driver),get_nome_auxdriver(driver),(get_avaliacao_auxdriver(driver)/get_contador_auxdriver(driver)));
     }
     printf("-----------------------------------------------------------------------------------------------------\n");
 
@@ -157,7 +128,7 @@ void printQuerie3(Catalogos catalogo, char* n){
     printf("\n--------------------------------------- QUERY 3 -----------------------------------------------\n");
     for (size_t i = 0; i < atoi(n); i++) {
         AUX_USER user = g_list_nth_data(sorted, i);
-        printf("%s;%s;%i\n", user->username, user->nome, user->distotal);
+        printf("%s;%s;%i\n", get_user_auxuser(user), get_nome_auxuser(user), get_distancia_auxuser(user));
     }
     printf("-----------------------------------------------------------------------------------------------------\n");
 }
@@ -193,16 +164,16 @@ void printQuerie7(Catalogos catalogo, char* n, char* city){
 
 }
 
-void printQuerie8(Catalogos catalogo, char* gender, int x){
-    GList* sorted = auxquerie8(catalogo, gender, x);
-    printf("\n--------------------------------------- QUERY 8 -----------------------------------------------\n");
-    int tamanho = g_list_length(sorted);
-    for (size_t i = 0; i < tamanho; i++) {
-        AUX_Q8 ride = g_list_nth_data(sorted, i);
-        printf( "%s;%s;%s;%s\n", ride->id, ride->nome, ride->username, ride->nome_user);
-    }
-    printf("-----------------------------------------------------------------------------------------------------\n");
-}
+// void printQuerie8(Catalogos catalogo, char* gender, char* x){
+//     GList* sorted = auxquerie8(catalogo, gender);
+//     printf("\n--------------------------------------- QUERY 8 -----------------------------------------------\n");
+//     int tamanho = g_list_length(sorted);
+//     for (size_t i = 0; i < tamanho; i++) {
+//         AUX_Q9 ride = g_list_nth_data(sorted, i);
+//         printf( "%s;%s;%s;%s\n", ride->id, driver->nome, ride->username, user->nome_user);
+//     }
+//     printf("-----------------------------------------------------------------------------------------------------\n");
+// }
 
 void printQuerie9(Catalogos catalogo, char* data_inicial, char* data_final){
     GList* sorted = auxquerie9(catalogo,data_inicial,data_final);
@@ -210,7 +181,8 @@ void printQuerie9(Catalogos catalogo, char* data_inicial, char* data_final){
     int tamanho = g_list_length(sorted);
     for (size_t i = 0; i < tamanho; i++) {
         AUX_Q9 ride = g_list_nth_data(sorted, i);
-        printf( "%s;%i/%i/%i;%s;%s,%s\n", ride->id, ride->data_viagem->dia, ride->data_viagem->mes, ride->data_viagem->ano, ride->distancia, ride->cidade,ride->tip);
+        Data aux = get_data_auxq9(ride);
+        printf("%s;%i/%i/%i;%s;%s,%.3f\n", get_id_auxq9(ride), get_dia(aux), get_mes(aux), get_ano(aux), get_distancia_auxq9(ride), get_cidade_auxq9(ride),atof(get_tip_auxq9(ride)));
     }
     printf("-----------------------------------------------------------------------------------------------------\n");
 }

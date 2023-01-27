@@ -57,6 +57,17 @@ char* get_account_status_user(User a) {
   return NULL;
 }
 
+void free_user(struct user* u) {
+  free(u->username);
+  free(u->name);
+  free(u->gender);
+  free(u->birth_date);
+  free(u->account_creation);
+  free(u->pay_method);
+  free(u->account_status);
+  free(u);
+}
+
 User build_user(char *line) {
 
     User a = malloc(sizeof(struct user));

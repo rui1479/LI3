@@ -2,35 +2,6 @@
 
 //-------------------------------------------------------------------------STRUCTS----------------------------------------------------------------------------------------------------------------
 
-
-struct aux_driver{
-    char *id;
-    char* nome;
-    double avaliacao;
-    int contador;
-};
-
-struct aux_user{
-    char *username;
-    char *nome;
-    int distotal;
-    Data viagem_recente;
-};
-
-struct aux_q9{
-    char *id;
-    Data data_viagem;
-    char *distancia;
-    char *cidade;
-    char *tip;
-};
-
-struct data{
-    int dia;
-    int mes;
-    int ano;
-};
-
 struct aux_q7{
     char *id;
     char *nome;
@@ -48,11 +19,6 @@ struct aux_q8{
     Data conta_driver;
     Data conta_user;
 };
-
-typedef struct aux_driver* AUX_DRIVER;
-typedef struct aux_user* AUX_USER;
-typedef struct aux_q9* AUX_Q9;
-typedef struct aux_q7* AUX_Q7;
 
 void query1_users(Catalogos catalogo, char *username, int linha){
     char* novousername = strsep(&username,"\n");
@@ -109,7 +75,7 @@ void query2 (Catalogos catalogo, char* N, int linha){
     GList* sorted = auxquerie2(catalogo);
     for (size_t i = 0; i < atoi(N); i++) {
         AUX_DRIVER driver = g_list_nth_data(sorted, i);
-        fprintf(query2txt, "%s;%s;%.3f\n", driver->id,driver->nome,(driver->avaliacao)/(driver->contador));
+        fprintf(query2txt, "%s;%s;%.3f\n", get_id_auxdriver(driver),get_nome_auxdriver(driver),(get_avaliacao_auxdriver(driver)/get_contador_auxdriver(driver)));
     }
     fclose(query2txt);
 }
@@ -121,7 +87,7 @@ void query3 (Catalogos catalogo, char* N, int linha){
     GList* sorted = auxquerie3(catalogo);
     for (size_t i = 0; i < atoi(N); i++) {
         AUX_USER user = g_list_nth_data(sorted, i);
-        fprintf(query3txt, "%s;%s;%i\n", user->username, user->nome, user->distotal);
+        fprintf(query3txt, "%s;%s;%i\n", get_user_auxuser(user), get_nome_auxuser(user), get_distancia_auxuser(user));
     }
     fclose(query3txt);
 }
@@ -187,6 +153,8 @@ void query9 (Catalogos catalogo, char* data_inicial, char* data_final, int linha
     int tamanho = g_list_length(sorted);
     for (size_t i = 0; i < tamanho; i++) {
         AUX_Q9 ride = g_list_nth_data(sorted, i);
-        fprintf(query9txt, "%s;%i/%i/%i;%s;%s,%.3f\n", ride->id, ride->data_viagem->dia, ride->data_viagem->mes, ride->data_viagem->ano, ride->distancia, ride->cidade,atof((ride->tip)));
+        Data aux = get_data_auxq9(ride);
+        fprintf(query9txt, "%s;%i/%i/%i;%s;%s,%.3f\n", get_id_auxq9(ride), get_dia(aux), get_mes(aux), get_ano(aux), get_distancia_auxq9(ride), get_cidade_auxq9(ride),atof(get_tip_auxq9(ride)));
     }
+    fclose(query9txt);
 }

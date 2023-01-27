@@ -17,6 +17,8 @@ char* get_score_driver_Rides(Rides r);
 char* get_tip_Rides(Rides r);
 char* get_comment_Rides(Rides r);
 
+void free_rides(Rides r);
+
 Rides build_Rides(char *line);
 
 #endif

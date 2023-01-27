@@ -35,8 +35,6 @@ CatUser parseUser(FILE* fileUser){
 CatRides parseRides(FILE* fileRides){
     CatRides catalogoRides = malloc(sizeof(CatRides)*100);
     GHashTable* rides = g_hash_table_new(g_str_hash, g_str_equal);
-    GHashTable* ridesuser = g_hash_table_new(g_str_hash, g_str_equal);
-    GHashTable* ridesdriver = g_hash_table_new(g_str_hash, g_str_equal);
     
     int max_length = 200;
     char buff[max_length];
