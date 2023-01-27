@@ -2,24 +2,6 @@
 
 //-------------------------------------------------------------------------STRUCTS----------------------------------------------------------------------------------------------------------------
 
-struct aux_q7{
-    char *id;
-    char *nome;
-    double avaliacao;
-    int contador;
-};
-
-struct aux_q8{
-    char *gender;
-    char *id;
-    char *nome;
-    char *username;
-    char *nome_user;
-    char *viagem;
-    Data conta_driver;
-    Data conta_user;
-};
-
 void query1_users(Catalogos catalogo, char *username, int linha){
     char* novousername = strsep(&username,"\n");
     User user = g_hash_table_lookup(catalogo->user, novousername);
@@ -126,7 +108,7 @@ void query7 (Catalogos catalogo, char* N, char* city, int linha){
     GList* sorted = auxquerie7(catalogo, city);
     for (size_t i = 0; i < atoi(N); i++) {
         AUX_Q7 ride = g_list_nth_data(sorted, i);
-        fprintf(query7txt, "%s;%s;%.3f\n", ride->id,ride->nome,(ride->avaliacao)/(ride->contador));
+        fprintf(query7txt, "%s;%s;%.3f\n", get_id_auxq7(ride), get_nome_auxq7(ride) ,(get_avaliacao_auxq7(ride)/get_contador_auxq7(ride)));
     }
     fclose(query7txt);
 }
@@ -139,7 +121,7 @@ void query8 (Catalogos catalogo, char* gender, int x, int linha){
     int tamanho = g_list_length(sorted);
     for (size_t i = 0; i < tamanho; i++) {
         AUX_Q8 ride = g_list_nth_data(sorted, i);
-        fprintf(query8txt, "%s;%s;%s;%s\n", ride->id, ride->nome, ride->username, ride->nome_user);
+        fprintf(query8txt, "%s;%s;%s;%s\n", get_id_auxq8(ride), get_nome_auxq8(ride), get_username_auxq8(ride), get_nome_user_auxq8(ride));
     }
     fclose(query8txt);
 }

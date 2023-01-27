@@ -1,22 +1,5 @@
 #include "../include/menu.h"
 
-struct aux_q7{
-    char *id;
-    char *nome;
-    double avaliacao;
-    int contador;
-};
-
-struct aux_q8{
-    char *gender;
-    char *id;
-    char *nome;
-    char *username;
-    char *nome_user;
-    char *viagem;
-    Data conta_driver;
-    Data conta_user;
-};
 
 void printMenuPrincipal(){
     printf("\n-------------------------------------------------------------------------------------\n");
@@ -158,8 +141,8 @@ void printQuerie7(Catalogos catalogo, char* n, char* city){
     printf("\n--------------------------------------- QUERY 7 -----------------------------------------------\n");
     for (size_t i = 0; i < atoi(n); i++) {
         AUX_Q7 driver = g_list_nth_data(sorted, i);
-        printf("%s;%s;%.3f\n", driver->id,driver->nome,(driver->avaliacao)/(driver->contador));
-    }
+        printf("%s;%s;%.3f\n", get_id_auxq7(ride),get_nome_auxq7(ride) , get_avaliacao_auxq7(ride) /get_contador_auxq7(ride));
+    
     printf("-----------------------------------------------------------------------------------------------------\n");
 
 }
@@ -170,7 +153,7 @@ void printQuerie7(Catalogos catalogo, char* n, char* city){
 //     int tamanho = g_list_length(sorted);
 //     for (size_t i = 0; i < tamanho; i++) {
 //         AUX_Q9 ride = g_list_nth_data(sorted, i);
-//         printf( "%s;%s;%s;%s\n", ride->id, driver->nome, ride->username, user->nome_user);
+//         printf( "%s;%s;%s;%s\n", get_id_auxq8(ride), get_nome_auxq8(driver), get_username_auxq8(ride), get_nome_user_auxq8(user));
 //     }
 //     printf("-----------------------------------------------------------------------------------------------------\n");
 // }

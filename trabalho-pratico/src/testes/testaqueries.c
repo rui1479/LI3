@@ -212,8 +212,8 @@ void testequery6(Catalogos catalogo){
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
     printf("\nQuery 6\nCPU Time: %.2f s!\n", cpu_time_used );
 
-    FILE *respostaQuery6 = fopen("src/testes/saida/testeQuery5.txt", "r");
-    FILE *respostaEsperada = fopen("src/testes/valido/query5_output.txt", "r");
+    FILE *respostaQuery6 = fopen("src/testes/saida/testeQuery6.txt", "r");
+    FILE *respostaEsperada = fopen("src/testes/valido/query6_output.txt", "r");
 
     if (respostaQuery6 == NULL || respostaEsperada == NULL){
         printf("Error : Files not open! \n");
@@ -259,8 +259,8 @@ void testequery9(Catalogos catalogo){
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
     printf("\nQuery 9\nCPU Time: %.2f s!\n", cpu_time_used );
 
-    FILE *respostaQuery9 = fopen("src/testes/saida/testeQuery3.txt", "r");
-    FILE *respostaEsperada = fopen("src/testes/valido/query3_output.txt", "r");
+    FILE *respostaQuery9 = fopen("src/testes/saida/testeQuery9.txt", "r");
+    FILE *respostaEsperada = fopen("src/testes/valido/query9_output.txt", "r");
 
     if (respostaQuery9 == NULL || respostaEsperada == NULL){
         printf("Error : Files not open! \n");

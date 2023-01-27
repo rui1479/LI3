@@ -11,7 +11,6 @@ void query4(Catalogos catalogo, char* city, int linha);
 void query5 (Catalogos catalogo, char* data_inicial, char* data_final, int linha);
 void query6 (Catalogos catalogo, char* city, char* data_inicial, char* data_final, int linha);
 void query7 (Catalogos catalogo, char* N, char* city, int linha);
-void query7 (Catalogos catalogo, char* N, char* city , int linha);
 void query8 (Catalogos catalogo, char* gender, int x , int linha);
 void query9 (Catalogos catalogo, char* data_inicial, char* data_final, int linha);
 

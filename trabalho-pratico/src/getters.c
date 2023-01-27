@@ -96,6 +96,93 @@ int get_distancia_auxuser (AUX_USER a){
     return 0;
 }
 
+
+char* get_id_auxq7 (AUX_Q7 a){
+    if (a){
+        return g_strdup(a->id);
+    }
+    return NULL;
+}
+
+char* get_nome_auxq7 (AUX_Q7 a){
+    if (a){
+        return g_strdup(a->nome);
+    }
+    return NULL;
+}
+
+double get_avaliacao_auxq7 (AUX_Q7 a){
+    if (a){
+        return a->avaliacao;
+    }
+    return 0;
+}
+
+int get_contador_auxq7 (AUX_Q7 a){
+    if (a){
+        return a->contador;
+    }
+    return 0;
+}
+           
+
+char* get_gender_auxq8 (AUX_Q8 a){
+    if (a){
+        return g_strdup(a->gender);
+    }
+    return NULL;
+}
+
+char* get_id_auxq8 (AUX_Q8 a){
+    if (a){
+        return g_strdup(a->id);
+    }
+    return NULL;
+}
+
+char* get_nome_auxq8 (AUX_Q8 a){
+    if (a){
+        return g_strdup(a->nome);
+    }
+    return NULL;
+}
+
+char* get_username_auxq8 (AUX_Q8 a){
+    if (a){
+        return g_strdup(a->username);
+    }
+    return NULL;
+}
+
+char* get_nome_user_auxq8 (AUX_Q8 a){
+    if (a){
+        return g_strdup(a->nome_user);
+    }
+    return NULL;
+}
+
+char* get_viagem_auxq8 (AUX_Q8 a){
+    if (a){
+        return g_strdup(a->viagem);
+    }
+    return NULL;
+}
+
+Data get_contaD_auxq8 (AUX_Q8 a){
+    if (a){
+        return (a->conta_driver);
+    }
+    return NULL;
+} 
+
+Data get_contaU_auxq8 (AUX_Q8 a){
+    if (a){
+        return (a->conta_user);
+    }
+    return NULL;
+} 
+
+
 char* get_id_auxq9 (AUX_Q9 a){
     if (a){
         return g_strdup(a->id);
@@ -194,31 +281,36 @@ int sort_function_q8(gconstpointer a, gconstpointer b){
     struct aux_q8 *q8_a = (struct aux_q8 *) a;
     struct aux_q8 *q8_b = (struct aux_q8 *) b;
 
-    if (q8_a->conta_driver->ano == q8_b->conta_driver->ano){
-        if (q8_a->conta_driver->mes == q8_b->conta_driver->mes){
-            if (q8_a->conta_driver->dia == q8_b->conta_driver->dia){ 
-                if (q8_a->conta_user->ano == q8_b->conta_user->ano){
-                    if (q8_a->conta_user->mes == q8_b->conta_user->mes){
-                       if (q8_a->conta_user->dia == q8_b->conta_user->dia){
+    Data q1 = q8_a->conta_driver;
+    Data q2 = q8_b->conta_driver;
+    Data q3 = q8_a->conta_user;
+    Data q4 = q8_b->conta_user;
+
+    if (get_ano(q1) == get_ano(q2)){
+        if (get_mes(q1) == get_mes(q2)){
+            if (get_dia(q1) == get_dia(q2)){ 
+                if (get_ano(q3) == get_ano(q4)){
+                    if (get_mes(q3) == get_mes(q4)){
+                       if (get_dia(q3) == get_dia(q4)){
                         return g_strcmp0(q8_a->viagem, q8_b->viagem);
                        }
                         else
-                            return q8_a->conta_user->dia - q8_b->conta_user->dia; 
+                            return get_dia(q3) - get_dia(q4); 
                     }
                      else
-                        return q8_a->conta_user->mes - q8_b->conta_user->mes;
+                        return get_mes(q3) - get_mes(q4);
                 }
                  else
-                    return q8_a->conta_user->ano - q8_b->conta_user->ano;
+                    return get_ano(q3) - get_ano(q4);
             }        
              else
-                return q8_a->conta_driver->dia - q8_b->conta_driver->dia; 
+                return get_dia(q1) - get_dia(q2); 
         }
          else
-             return q8_a->conta_driver->mes - q8_b->conta_driver->mes;
+             return get_mes(q1) - get_mes(q2);
     }
     else
-        return q8_a->conta_driver->ano - q8_b->conta_driver->ano; 
+        return get_ano(q1) - get_ano(q2); 
 }
 
 int sort_function_q9(gconstpointer a, gconstpointer b){

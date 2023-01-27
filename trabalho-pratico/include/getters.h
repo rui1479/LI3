@@ -25,6 +25,20 @@ char* get_user_auxuser (AUX_USER a);
 char* get_nome_auxuser (AUX_USER a);
 int get_distancia_auxuser (AUX_USER a);
 
+char* get_id_auxq7 (AUX_Q7 a);
+char* get_nome_auxq7 (AUX_Q7 a);
+double get_avaliacao_auxq7 (AUX_Q7 a);
+int get_contador_auxq7 (AUX_Q7 a);
+     
+char* get_gender_auxq8 (AUX_Q8 a);
+char* get_id_auxq8 (AUX_Q8 a);
+char* get_nome_auxq8 (AUX_Q8 a);
+char* get_username_auxq8 (AUX_Q8 a);
+char* get_nome_user_auxq8 (AUX_Q8 a);
+char* get_viagem_auxq8 (AUX_Q8 a);
+Data get_contaD_auxq8 (AUX_Q8 a);
+Data get_contaU_auxq8 (AUX_Q8 a);
+
 char* get_id_auxq9 (AUX_Q9 a);
 char* get_distancia_auxq9 (AUX_Q9 a);
 char* get_cidade_auxq9 (AUX_Q9 a);
