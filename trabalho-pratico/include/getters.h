@@ -68,7 +68,7 @@ double get_distancia_media_city_test(Catalogos catalogo, char* city, Data inicia
 GList* auxquerie2 (Catalogos catalogo);
 GList* auxquerie3 (Catalogos catalogo);
 GList* auxquerie7 (Catalogos catalogo,char* city);
-// GList* auxquerie8 (Catalogos catalogo,char* gender);
+GList* auxquerie8 (Catalogos catalogo,char* gender, int x);
 GList* auxquerie9 (Catalogos catalogo,char* data_inicial, char* data_final);
 
 #endif

@@ -26,13 +26,12 @@ void printMenuPrincipal(){
 }
 
 int printSubMenu(){
-    char* menu;
+    char menu[1];
     printf("\n-----------------------------------------------------------------------------------------------\n");
     printf("|1| Voltar ao menu principal \n|0| Sair \n");
     printf("-----------------------------------------------------------------------------------------------\n");
     printf("Opção desejada: ");
     scanf("%s", menu);
-
     if (atoi(menu) == 0){
         printf("Obrigado!\n");
         return 0;
@@ -141,10 +140,9 @@ void printQuerie7(Catalogos catalogo, char* n, char* city){
     printf("\n--------------------------------------- QUERY 7 -----------------------------------------------\n");
     for (size_t i = 0; i < atoi(n); i++) {
         AUX_Q7 driver = g_list_nth_data(sorted, i);
-        printf("%s;%s;%.3f\n", get_id_auxq7(ride),get_nome_auxq7(ride) , get_avaliacao_auxq7(ride) /get_contador_auxq7(ride));
-    
+        printf("%s;%s;%.3f\n", get_id_auxq7(driver),get_nome_auxq7(driver) , get_avaliacao_auxq7(driver) /get_contador_auxq7(driver));
+    } 
     printf("-----------------------------------------------------------------------------------------------------\n");
-
 }
 
 // void printQuerie8(Catalogos catalogo, char* gender, char* x){
