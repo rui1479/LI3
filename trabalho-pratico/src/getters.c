@@ -818,13 +818,13 @@ GList* auxquerie7 (Catalogos catalogo, char* city){
     return sorted;
 }
 
-GList* auxquerie8 (Catalogos catalogo,char* gender, int x){
+GList* auxquerie8 (Catalogos catalogo,char* gender, char *x){
     GHashTable* map = g_hash_table_new(g_str_hash, g_str_equal);
     gpointer keyQuery8, valueQuery8;
     GHashTableIter iterQuery8;
 
     Data atual = build_data(g_strdup(ANO));
-    int ano_ref = (get_ano(atual) - x);
+    int ano_ref = (get_ano(atual) - atoi(x));
     int mes_ref = get_mes(atual);
     int dia_ref = get_dia(atual);
 
@@ -833,7 +833,8 @@ GList* auxquerie8 (Catalogos catalogo,char* gender, int x){
     g_hash_table_iter_init(&iterQuery8,catalogo->Rides);
     while(g_hash_table_iter_next(&iterQuery8, &keyQuery8, &valueQuery8)) {
          Rides ride = valueQuery8;
-         Data data_a_comparar = build_data(get_date_Rides(ride));
+         char* account = g_strdup(get_date_Rides(ride));
+         Data data_a_comparar = build_data(account);
          int ano_ride = get_ano(data_a_comparar);
          int mes_ride = get_mes(data_a_comparar);
          int dia_ride = get_dia(data_a_comparar);

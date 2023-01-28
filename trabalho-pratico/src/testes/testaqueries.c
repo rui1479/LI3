@@ -229,13 +229,86 @@ void testequery6(Catalogos catalogo){
 
 }
 
-// void testequery7(Catalogos catalogo){
+void testequery7(Catalogos catalogo){
+    clock_t start, end;
+    double cpu_time_used;
+    
+    start = clock();
 
-// }
+    char *N = "50";
+    char *city = "Setúbal";
 
-// void testequery8(Catalogos catalogo){
+    GList* querie7 = auxquerie7(catalogo, city);
+    FILE *query7txt = fopen("src/testes/saida/testeQuery7.txt", "w");
+   
+    for (size_t i = 0; i < atoi(N); i++) {
+        AUX_Q7 ride = g_list_nth_data(querie7, i);
+        fprintf(query7txt, "%s;%s;%.3f\n", get_id_auxq7(ride), get_nome_auxq7(ride) ,(get_avaliacao_auxq7(ride)/get_contador_auxq7(ride)));
+    }
+    fclose(query7txt);
+    
+    end = clock();
 
-// }
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("\nQuery 7\nCPU Time: %.2f s!\n", cpu_time_used );
+
+    FILE *respostaQuery7 = fopen("src/testes/saida/testeQuery7.txt", "r");
+    FILE *respostaEsperada = fopen("src/testes/valido/query7_output.txt", "r");
+
+    if (respostaQuery7 == NULL || respostaEsperada == NULL){
+        printf("Error : Files not open! \n");
+        exit(0);
+    }
+
+    int valido = compareFiles(respostaQuery7, respostaEsperada);
+    fclose(respostaQuery7);
+    fclose(respostaEsperada);
+
+    if (valido == 1) printf("Output correto!\n");
+    else printf("Erro no output produzido!\n");
+
+}
+
+void testequery8(Catalogos catalogo){
+    clock_t start, end;
+    double cpu_time_used;
+    
+    start = clock();
+
+    char *gender = "M";
+    char *x = "12";
+
+    GList* querie8 = auxquerie8(catalogo, gender, x);
+    FILE *query8txt = fopen("src/testes/saida/testeQuery8.txt", "w");
+   
+    int tamanho = g_list_length(querie8);
+    for (size_t i = 0; i < tamanho; i++) {
+        AUX_Q8 ride = g_list_nth_data(querie8, i);
+        fprintf(query8txt, "%s;%s;%s;%s\n", get_id_auxq8(ride), get_nome_auxq8(ride), get_username_auxq8(ride), get_nome_user_auxq8(ride));
+    }
+    fclose(query8txt);
+    
+    end = clock();
+
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("\nQuery 8\nCPU Time: %.2f s!\n", cpu_time_used );
+
+    FILE *respostaQuery8 = fopen("src/testes/saida/testeQuery8.txt", "r");
+    FILE *respostaEsperada = fopen("src/testes/valido/query8_output.txt", "r");
+
+    if (respostaQuery8 == NULL || respostaEsperada == NULL){
+        printf("Error : Files not open! \n");
+        exit(0);
+    }
+
+    int valido = compareFiles(respostaQuery8, respostaEsperada);
+    fclose(respostaQuery8);
+    fclose(respostaEsperada);
+
+    if (valido == 1) printf("Output correto!\n");
+    else printf("Erro no output produzido!\n");
+
+}
 
 void testequery9(Catalogos catalogo){
     clock_t start, end;

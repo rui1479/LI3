@@ -113,7 +113,7 @@ void query7 (Catalogos catalogo, char* N, char* city, int linha){
     fclose(query7txt);
 }
 
-void query8 (Catalogos catalogo, char* gender, int x, int linha){
+void query8 (Catalogos catalogo, char* gender, char *x, int linha){
     char buffer[128];
     sprintf(buffer, "Resultados/command%d_output.txt", linha);
     FILE *query8txt = fopen(buffer, "w");
