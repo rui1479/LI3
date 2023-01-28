@@ -250,7 +250,7 @@ void testequery9(Catalogos catalogo){
     for (size_t i = 0; i < tamanho; i++) {
         AUX_Q9 ride = g_list_nth_data(querie9, i);
         Data aux = get_data_auxq9(ride);
-        fprintf(query9txt, "%s;%i/%i/%i;%s;%s,%.3f\n", get_id_auxq9(ride), get_dia(aux), get_mes(aux), get_ano(aux), get_distancia_auxq9(ride), get_cidade_auxq9(ride),atof(get_tip_auxq9(ride)));
+        fprintf(query9txt, "%s;%i/%i/%i;%s;%s;%.3f\n", get_id_auxq9(ride), get_dia(aux), get_mes(aux), get_ano(aux), get_distancia_auxq9(ride), get_cidade_auxq9(ride),atof(get_tip_auxq9(ride)));
     }
     fclose(query9txt);
 

@@ -163,7 +163,7 @@ void printQuerie9(Catalogos catalogo, char* data_inicial, char* data_final){
     for (size_t i = 0; i < tamanho; i++) {
         AUX_Q9 ride = g_list_nth_data(sorted, i);
         Data aux = get_data_auxq9(ride);
-        printf("%s;%i/%i/%i;%s;%s,%.3f\n", get_id_auxq9(ride), get_dia(aux), get_mes(aux), get_ano(aux), get_distancia_auxq9(ride), get_cidade_auxq9(ride),atof(get_tip_auxq9(ride)));
+        printf("%s;%i/%i/%i;%s;%s;%.3f\n", get_id_auxq9(ride), get_dia(aux), get_mes(aux), get_ano(aux), get_distancia_auxq9(ride), get_cidade_auxq9(ride),atof(get_tip_auxq9(ride)));
     }
     printf("-----------------------------------------------------------------------------------------------------\n");
 }
