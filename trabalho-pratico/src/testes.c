@@ -32,8 +32,8 @@ int main (int argc, char* argv[]){
         testequery4(catalogos);
         testequery5(catalogos);
         testequery6(catalogos);
-        //testequery7(catalogos);
-        //testequery8(catalgos);
+        testequery7(catalogos);
+        testequery8(catalogos);
         testequery9(catalogos);
 
     return 0;

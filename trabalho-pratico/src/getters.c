@@ -833,30 +833,44 @@ GList* auxquerie8 (Catalogos catalogo,char* gender, char *x){
     g_hash_table_iter_init(&iterQuery8,catalogo->Rides);
     while(g_hash_table_iter_next(&iterQuery8, &keyQuery8, &valueQuery8)) {
          Rides ride = valueQuery8;
-         char* account = g_strdup(get_date_Rides(ride));
-         Data data_a_comparar = build_data(account);
-         int ano_ride = get_ano(data_a_comparar);
-         int mes_ride = get_mes(data_a_comparar);
-         int dia_ride = get_dia(data_a_comparar);
-         if(ano_ref > ano_ride || ano_ref == ano_ride && mes_ref > mes_ride || ano_ref == ano_ride && mes_ref == mes_ride && dia_ref > dia_ride || ano_ref == ano_ride && mes_ref == mes_ride && dia_ref == dia_ride){
-          AUX_Q8 elem = malloc(sizeof(struct aux_q8)); 
-          elem->id = get_driver_Rides(ride);
-          Driver drivers = g_hash_table_lookup(catalogo->Driver, elem->id);
-          elem->username = get_user_Rides(ride);
-          User user = g_hash_table_lookup(catalogo->user, elem->username);
-          if(strcmp(get_gender_driver(drivers),get_gender_user(user))==0 && strcmp(novogender,get_gender_driver(drivers)) == 0 ){
-            elem->nome = get_name_driver(drivers);
-            elem->nome_user = get_name_user(user);
-            elem->conta_driver=build_data(get_account_creation_driver(drivers));
-            elem->conta_user = build_data(get_account_creation_user(user));
-            elem->viagem=get_id_Rides(ride);
-            g_hash_table_insert(map, elem->id, elem);
-            }
+
+         char *id_driver = g_strdup(get_driver_Rides(ride));
+         Driver drivers = g_hash_table_lookup(catalogo->Driver, id_driver);
+         char* account_driver = g_strdup(get_account_creation_driver(drivers));
+         Data data_driver = build_data(account_driver);
+         int ano_driver = get_ano(data_driver);
+         int mes_driver = get_mes(data_driver);
+         int dia_driver = get_dia(data_driver);
+
+         char *id_user = g_strdup(get_user_Rides(ride));
+         User user = g_hash_table_lookup(catalogo->user, id_user);
+         char* account_user = g_strdup(get_account_creation_user(user));
+         Data data_user = build_data(account_user);
+         int ano_user = get_ano(data_user);
+         int mes_user = get_mes(data_user);
+         int dia_user = get_dia(data_user);
+
+
+         if(ano_ref > ano_driver || ano_ref == ano_driver && mes_ref > mes_driver || ano_ref == ano_driver && mes_ref == mes_driver && dia_ref > dia_driver || ano_ref == ano_driver && mes_ref == mes_driver && dia_ref == dia_driver){
+          if(ano_ref > ano_user || ano_ref == ano_user && mes_ref > mes_user || ano_ref == ano_user && mes_ref == mes_user && dia_ref > dia_user || ano_ref == ano_user && mes_ref == mes_user && dia_ref == dia_user){
+            AUX_Q8 elem = malloc(sizeof(struct aux_q8)); 
+            elem->id = get_driver_Rides(ride);
+            elem->username = get_user_Rides(ride);
+            User user = g_hash_table_lookup(catalogo->user, elem->username);
+            if(strcmp(get_gender_driver(drivers),get_gender_user(user))==0 && strcmp(novogender,get_gender_driver(drivers)) == 0 ){
+              elem->nome = get_name_driver(drivers);
+              elem->nome_user = get_name_user(user);
+              elem->conta_driver=build_data(get_account_creation_driver(drivers));
+              elem->conta_user = build_data(get_account_creation_user(user));
+              elem->viagem=get_id_Rides(ride);
+              g_hash_table_insert(map, elem->id, elem);
+              }
+          }   
         }
       }
     
     GList* list = g_hash_table_get_values(map);
-    GList* sorted = g_list_sort(list, sort_function_q9);
+    GList* sorted = g_list_sort(list, sort_function_q8);
 
     return sorted;
 }
