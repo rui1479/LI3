@@ -869,7 +869,7 @@ GList* auxquerie8 (Catalogos catalogo,char* gender, char *x){
         }
       }
     
-    GList* list = g_hash_table_get_values(map);s
+    GList* list = g_hash_table_get_values(map);
     GList* sorted = g_list_sort(list, sort_function_q8);
 
     return sorted;
