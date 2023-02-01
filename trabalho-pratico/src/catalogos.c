@@ -1,6 +1,38 @@
 #include "../include/catalogos.h"
 #define ANO "09/10/2022"
 
+// -----------------------------------------------------------------------STRUCTS --------------------------------------------------------------------------------------------
+
+struct catalog_driver {
+    GHashTable* Driver;
+};
+
+struct catalog_rides {
+    GHashTable* Rides;
+};
+
+struct catalog_user {
+    GHashTable* user;
+};
+
+struct catalogos {
+    GHashTable* Driver;
+    GHashTable* Rides;
+    GHashTable* user;
+};
+
+GHashTable* get_catalogo_user (Catalogos a){
+    return a->user;
+};
+
+GHashTable* get_catalogo_driver (Catalogos a){
+    return a->Driver;
+};
+
+GHashTable* get_catalogo_rides (Catalogos a){
+    return a->Rides;
+};
+
 // -----------------------------------------------------------------------Parse User -----------------------------------------------------------------------------------------
 
 CatUser parseUser(FILE* fileUser){

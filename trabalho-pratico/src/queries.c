@@ -4,7 +4,7 @@
 
 void query1_users(Catalogos catalogo, char *username, int linha){
     char* novousername = strsep(&username,"\n");
-    User user = g_hash_table_lookup(catalogo->user, novousername);
+    User user = g_hash_table_lookup(get_catalogo_user(catalogo), novousername);
     if(strcmp("active",get_account_status_user(user))==0){
         char buffer[128];
         sprintf(buffer, "Resultados/command%d_output.txt", linha);
@@ -28,7 +28,7 @@ void query1_users(Catalogos catalogo, char *username, int linha){
 
 void query1_drivers(Catalogos catalogo, char *id, int linha){
     char* novoid = strsep(&id,"\n");
-    Driver drivers = g_hash_table_lookup(catalogo->Driver, novoid);
+    Driver drivers = g_hash_table_lookup(get_catalogo_driver(catalogo), novoid);
     if(strcmp("active",get_account_status_driver(drivers))==0){
         char buffer[128];
         sprintf(buffer, "Resultados/command%d_output.txt", linha);

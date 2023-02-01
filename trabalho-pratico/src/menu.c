@@ -54,7 +54,7 @@ int printSubMenu(){
 
 void printQuerie1_U(Catalogos catalogo, char* id){
     char* novousername = strsep(&id,"\n");
-    User user = g_hash_table_lookup(catalogo->user, novousername);
+    User user = g_hash_table_lookup(get_catalogo_user(catalogo), novousername);
     if(user){
         char *nome = get_name_list_user(catalogo, novousername);
         char *gender = get_gender_list_user(catalogo, novousername);
@@ -75,7 +75,7 @@ void printQuerie1_U(Catalogos catalogo, char* id){
 
 void printQuerie1_D(Catalogos catalogo, char* id){
     char* novoid = strsep(&id,"\n");
-    Driver drivers = g_hash_table_lookup(catalogo->Driver, novoid);
+    Driver drivers = g_hash_table_lookup(get_catalogo_driver(catalogo), novoid);
     if(drivers){
         char *nome = get_name_list_driver(catalogo,novoid);
         char *gender = get_gender_list_driver(catalogo,novoid);

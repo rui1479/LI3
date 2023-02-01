@@ -11,29 +11,14 @@
 #include "../include/data.h"
 #include "../include/validadur.h"
 
-struct catalog_driver {
-    GHashTable* Driver;
-};
-
-struct catalog_rides {
-    GHashTable* Rides;
-};
-
-struct catalog_user {
-    GHashTable* user;
-};
-
-struct catalogos {
-    GHashTable* Driver;
-    GHashTable* Rides;
-    GHashTable* user;
-};
-
 typedef struct catalog_driver* CatDriver;
 typedef struct catalog_rides* CatRides;
 typedef struct catalog_user* CatUser;
 typedef struct catalogos* Catalogos;
 
+GHashTable* get_catalogo_user (Catalogos a);
+GHashTable* get_catalogo_driver (Catalogos a);
+GHashTable* get_catalogo_rides (Catalogos a);
 Catalogos carregaCatalogos(FILE* user,FILE* driver, FILE* rides);
 
 #include "../include/queries.h"
