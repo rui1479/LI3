@@ -1,7 +1,7 @@
 #ifndef QUERIES_H
 #define QUERIES_H
 
-#include "../include/catalogos.h"
+#include "../include/getters.h"
 
 void query1_users(Catalogos catalogo, char *username, int linha);
 void query1_drivers(Catalogos catalogo, char *id, int linha);

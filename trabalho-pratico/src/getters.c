@@ -835,7 +835,7 @@ GList* auxquerie8 (Catalogos catalogo,char* gender, char *x){
     //      Rides ride = valueQuery8;
 
     //      char *id_driver = g_strdup(get_driver_Rides(ride));
-    //      Driver drivers = g_hash_table_lookup(get_catalogo_driver(catalogos), id_driver);
+    //      Driver drivers = g_hash_table_lookup(get_catalogo_driver(catalogo), id_driver);
     //      char* account_driver = g_strdup(get_account_creation_driver(drivers));
     //      Data data_driver = build_data(account_driver);
     //      int ano_driver = get_ano(data_driver);
@@ -843,7 +843,7 @@ GList* auxquerie8 (Catalogos catalogo,char* gender, char *x){
     //      int dia_driver = get_dia(data_driver);
 
     //      char *id_user = g_strdup(get_user_Rides(ride));
-    //      User user = g_hash_table_lookup(get_catalogo_user(catalogos), id_user);
+    //      User user = g_hash_table_lookup(get_catalogo_user(catalogo), id_user);
     //      char* account_user = g_strdup(get_account_creation_user(user));
     //      Data data_user = build_data(account_user);
     //      int ano_user = get_ano(data_user);
@@ -856,7 +856,7 @@ GList* auxquerie8 (Catalogos catalogo,char* gender, char *x){
     //         AUX_Q8 elem = malloc(sizeof(struct aux_q8)); 
     //         elem->id = get_driver_Rides(ride);
     //         elem->username = get_user_Rides(ride);
-    //         User user = g_hash_table_lookup(get_catalogo_user(catalogos), elem->username);
+    //         User user = g_hash_table_lookup(get_catalogo_user(catalogo), elem->username);
     //         if(strcmp(get_gender_driver(drivers),get_gender_user(user))==0 && strcmp(novogender,get_gender_driver(drivers)) == 0 ){
     //           elem->nome = get_name_driver(drivers);
     //           elem->nome_user = get_name_user(user);

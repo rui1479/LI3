@@ -1,4 +1,5 @@
-#include "../include/catalogos.h"
+#include "../include/queries.h"
+#include "../include/menu.h"
 #define MAXL 1024000
 
 /**

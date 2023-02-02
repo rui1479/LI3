@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "../include/catalogos.h"
 #include "testes/testaqueries.c"
 
 int main (int argc, char* argv[]){

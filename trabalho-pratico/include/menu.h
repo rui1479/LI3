@@ -4,7 +4,6 @@
 #include <glib.h>
 #include <gmodule.h>
 
-#include "../include/catalogos.h"
 #include "../include/getters.h"
 
 void printMenuPrincipal();

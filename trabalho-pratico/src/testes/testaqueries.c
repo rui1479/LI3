@@ -1,6 +1,5 @@
 #include <stdio.h>
-#include "../../include/catalogos.h"
-#include "../../include/validadur.h"
+#include "../../include/getters.h"
 
 #define ANO_I "01/01/2021"
 #define ANO_F "01/01/2022"

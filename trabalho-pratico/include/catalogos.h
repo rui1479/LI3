@@ -22,7 +22,6 @@ GHashTable* get_catalogo_rides (Catalogos a);
 Catalogos carregaCatalogos(FILE* user,FILE* driver, FILE* rides);
 
 #include "../include/queries.h"
-#include "../include/getters.h"
 #include "../include/menu.h"
 
 #endif                                                                              
