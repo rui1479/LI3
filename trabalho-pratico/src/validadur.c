@@ -101,14 +101,11 @@ int testa_distance(char *line){
     return 0;
 }
 
-int testa_digito(char *numero){
-    int valido = 1;
-    
-    for (int i = 1; *numero ;i++){
-        if (!isdigit(numero[i])) valido = 0;
-    }
-
-    return valido;
+int testa_digito(const char* s) {
+  while (*s) {
+    if (!isdigit(*s++)) return 0;
+  }
+  return 1;
 }
 
 int testa_score(char *line){

@@ -53,8 +53,17 @@ $(BIN_DIR)/menu.o: $(BIN_DIR) $(SRC_DIR)/menu.c
 $(BIN_DIR)/testes.o: $(BIN_DIR) $(SRC_DIR)/testes.c
 	$(CC) $(CFLAGS) -I$(INC_DIR) -c $(SRC_DIR)/testes.c -o $@
 
-run: 
-	./programa-principal Dataset_Fase1 Dataset_Fase1/input.txt  
+run1: 
+	./programa-principal Dataset_Fase1 Dataset_Fase1/input.txt
+
+run2: 
+	./programa-principal Dataset_Fase2 Dataset_Fase1/input.txt  
+
+run3: 
+	./programa-principal Dataset_Fase3 Dataset_Fase1/input.txt  
+
+run4: 
+	./programa-principal Dataset_Fase4 Dataset_Fase1/input.txt  
 
 menu:
 	./programa-principal
